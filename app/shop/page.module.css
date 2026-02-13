@@ -1,0 +1,115 @@
+/* ============================================
+   Shop Page
+   ============================================ */
+
+.page {
+  min-height: 100vh;
+}
+
+/* ============================================
+   Hero / Title Section
+   ============================================ */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl) var(--container-padding) var(--space-2xl);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin-top: var(--space-lg);
+}
+
+/* ============================================
+   Breadcrumb
+   ============================================ */
+
+.breadcrumb {
+  margin-bottom: var(--space-xs);
+}
+
+.breadcrumbList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  list-style: none;
+}
+
+.breadcrumbItem {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.breadcrumbLink {
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.breadcrumbLink:hover {
+  color: var(--text-primary);
+}
+
+.breadcrumbSeparator {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.breadcrumbCurrent {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   Content Area
+   ============================================ */
+
+.content {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding) var(--space-4xl);
+}
+
+/* ============================================
+   Tablet — 768px
+   ============================================ */
+
+@media (min-width: 768px) {
+  .hero {
+    padding: var(--space-4xl) var(--container-padding) var(--space-3xl);
+  }
+
+  .title {
+    font-size: var(--text-5xl);
+    margin-top: var(--space-xl);
+  }
+
+  .breadcrumbItem {
+    font-size: var(--text-sm);
+  }
+}
+
+/* ============================================
+   Desktop — 1200px
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .hero {
+    padding: var(--space-5xl) var(--container-padding) var(--space-3xl);
+  }
+
+  .title {
+    font-size: var(--text-6xl);
+  }
+}

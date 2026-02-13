@@ -1,0 +1,344 @@
+/* ============================================
+   Header — Core
+   ============================================ */
+
+.header {
+  position: fixed;
+  top: var(--announcement-height);
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-light);
+  z-index: var(--z-sticky);
+  transition: box-shadow var(--transition-base);
+}
+
+.scrolled {
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* ============================================
+   Left Section
+   ============================================ */
+
+.left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-primary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: -8px;
+}
+
+.hamburger svg {
+  display: block;
+}
+
+.desktopNav {
+  display: none;
+}
+
+/* ============================================
+   Logo (Center)
+   ============================================ */
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logoImage {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ============================================
+   Right Section
+   ============================================ */
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+  flex: 1;
+  min-width: 0;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  color: var(--color-primary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.iconButton:hover {
+  opacity: 0.6;
+}
+
+.iconButton svg {
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 16px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ============================================
+   Nav Links (Desktop)
+   ============================================ */
+
+.navLink {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  padding: var(--space-sm) 0;
+  position: relative;
+  transition: opacity var(--transition-fast);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-primary);
+  transition: width var(--transition-base);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.navLink:hover {
+  opacity: 0.7;
+}
+
+/* ============================================
+   Mobile Overlay
+   ============================================ */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background-color: var(--color-white);
+  z-index: var(--z-overlay);
+  transform: translateX(-100%);
+  transition: transform var(--transition-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.overlayOpen {
+  transform: translateX(0);
+}
+
+.overlayInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--space-lg) var(--container-padding);
+}
+
+.overlayHeader {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: var(--header-height);
+  margin-bottom: var(--space-3xl);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-primary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.closeButton svg {
+  display: block;
+}
+
+/* ============================================
+   Mobile Nav Links
+   ============================================ */
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  flex: 1;
+}
+
+.mobileNavLink {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-primary);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.overlayOpen .mobileNavLink {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideUp 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobileNavLink:hover {
+  opacity: 0.6;
+}
+
+/* ============================================
+   Overlay Footer
+   ============================================ */
+
+.overlayFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--color-light);
+  margin-top: auto;
+}
+
+.overlayFooterLink {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  transition: color var(--transition-fast);
+}
+
+.overlayFooterLink:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   Tablet — 768px
+   ============================================ */
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .logoImage {
+    height: 42px;
+  }
+
+  .right {
+    gap: var(--space-sm);
+  }
+
+  .iconButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .overlay {
+    display: none;
+  }
+}
+
+/* ============================================
+   Desktop — 1200px
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .desktopNav {
+    gap: var(--space-2xl);
+  }
+
+  .logoImage {
+    height: 48px;
+  }
+
+  .right {
+    gap: var(--space-md);
+  }
+}
