@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useCart } from '@/lib/cart-context';
 import styles from './Header.module.css';
 
@@ -106,12 +105,9 @@ export function Header() {
 
         {/* Center: Logo */}
         <Link href="/" className={styles.logo} aria-label="FAY Collectibles home">
-          <Image
-            src="/svgs/logo-white.svg"
-            alt="FAY Collectibles"
-            width={120}
-            height={48}
-            priority
+          <img
+            src="/brand/logo-black.svg"
+            alt="FAY"
             className={styles.logoImage}
           />
         </Link>

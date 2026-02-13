@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CartDrawer } from "@/components/ui/CartDrawer";
 import { CartProvider } from "@/lib/cart-context";
 
 const inter = Inter({
@@ -27,9 +29,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.variable}>
         <CartProvider>
+          <AnnouncementBar />
           <Header />
           <main>{children}</main>
           <Footer />
+          <CartDrawer />
         </CartProvider>
       </body>
     </html>

@@ -74,8 +74,8 @@
 }
 
 .logoImage {
-  height: 36px;
-  width: auto;
+  height: 40px;
+  width: 40px;
   object-fit: contain;
 }
 
@@ -308,7 +308,8 @@
   }
 
   .logoImage {
-    height: 42px;
+    height: 44px;
+    width: 44px;
   }
 
   .right {
@@ -336,6 +337,7 @@
 
   .logoImage {
     height: 48px;
+    width: 48px;
   }
 
   .right {

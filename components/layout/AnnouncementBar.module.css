@@ -1,12 +1,15 @@
 .bar {
   width: 100%;
   height: var(--announcement-height);
-  background-color: var(--color-primary);
+  background-color: var(--color-black);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: var(--z-sticky);
 }
 

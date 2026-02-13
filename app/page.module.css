@@ -1,0 +1,654 @@
+/* ============================================
+   Home Page
+   ============================================ */
+
+.page {
+  width: 100%;
+}
+
+/* ============================================
+   Hero
+   ============================================ */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--color-black);
+  margin-top: calc((var(--announcement-height) + var(--header-height)) * -1);
+  padding-top: calc(var(--announcement-height) + var(--header-height));
+  overflow: hidden;
+}
+
+.heroPattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 540px auto;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xl);
+  padding: 0 var(--container-padding);
+}
+
+.heroLogo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: var(--space-md);
+}
+
+.heroTitle {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: var(--leading-tight);
+}
+
+.heroLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-top: var(--space-lg);
+  transition: opacity var(--transition-base);
+}
+
+.heroLink:hover {
+  opacity: 0.6;
+}
+
+.heroLink svg {
+  transition: transform var(--transition-base);
+}
+
+.heroLink:hover svg {
+  transform: translateX(4px);
+}
+
+.heroScroll {
+  position: absolute;
+  bottom: var(--space-2xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-secondary);
+  z-index: 2;
+}
+
+.heroScroll span {
+  font-size: 10px;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.heroScrollLine {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--color-secondary), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ============================================
+   Section Header (shared)
+   ============================================ */
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-3xl);
+}
+
+.sectionTitle {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  line-height: var(--leading-tight);
+}
+
+.sectionSubtitle {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wider);
+}
+
+.sectionCta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-3xl);
+}
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-primary);
+  padding-bottom: 2px;
+  transition: opacity var(--transition-fast);
+}
+
+.ctaLink:hover {
+  opacity: 0.6;
+}
+
+.ctaLink svg {
+  transition: transform var(--transition-base);
+}
+
+.ctaLink:hover svg {
+  transform: translateX(3px);
+}
+
+/* ============================================
+   Featured Products
+   ============================================ */
+
+.featured {
+  padding: var(--space-5xl) var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: opacity var(--transition-base);
+}
+
+.productCard:hover {
+  opacity: 0.85;
+}
+
+.productImageWrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.productImage {
+  aspect-ratio: 3 / 4;
+  background-color: var(--color-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.productImagePattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 280px auto;
+  opacity: 0.5;
+}
+
+.productBadge {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  padding: 4px 10px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.productName {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+}
+
+.productPrice {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ============================================
+   Brand Ethos
+   ============================================ */
+
+.ethos {
+  position: relative;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.ethosPattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 540px auto;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.ethosInner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-5xl) var(--container-padding);
+}
+
+.ethosText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.ethosHeadline {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.ethosBody {
+  font-size: var(--text-base);
+  color: var(--color-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 480px;
+}
+
+.ethosLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: opacity var(--transition-fast);
+}
+
+.ethosLink:hover {
+  opacity: 0.6;
+}
+
+.ethosLink svg {
+  transition: transform var(--transition-base);
+}
+
+.ethosLink:hover svg {
+  transform: translateX(3px);
+}
+
+.ethosVisual {
+  display: none;
+}
+
+.ethosVisualImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.08;
+}
+
+/* ============================================
+   Collections
+   ============================================ */
+
+.collections {
+  padding: var(--space-5xl) var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.collectionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.collectionCard {
+  display: block;
+  transition: transform var(--transition-base);
+}
+
+.collectionCard:hover {
+  transform: translateY(-2px);
+}
+
+.collectionInner {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background-color: var(--color-light);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.collectionPattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 320px auto;
+  opacity: 0.6;
+  transition: opacity var(--transition-base);
+}
+
+.collectionCard:hover .collectionPattern {
+  opacity: 0.4;
+}
+
+.collectionContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-xl);
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  color: var(--color-white);
+}
+
+.collectionName {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.collectionDesc {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: var(--tracking-wide);
+}
+
+.collectionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  margin-top: var(--space-sm);
+  transition: opacity var(--transition-fast);
+}
+
+.collectionCard:hover .collectionLink {
+  opacity: 0.7;
+}
+
+/* ============================================
+   Editorial Band
+   ============================================ */
+
+.editorial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-2xl);
+  padding: var(--space-5xl) var(--container-padding);
+  background-color: #f7f7f7;
+}
+
+.editorialSign {
+  width: 240px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.editorialText {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wider);
+  font-weight: var(--font-weight-regular);
+}
+
+/* ============================================
+   Newsletter
+   ============================================ */
+
+.newsletter {
+  position: relative;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.newsletterPattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 540px auto;
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+.newsletterInner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-5xl) var(--container-padding);
+}
+
+.newsletterTitle {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.newsletterDesc {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.newsletterForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 400px;
+  margin-top: var(--space-md);
+}
+
+.newsletterInput {
+  width: 100%;
+  height: 48px;
+  padding: 0 var(--space-lg);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.newsletterInput::placeholder {
+  color: var(--color-secondary);
+}
+
+.newsletterInput:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletterButton {
+  width: 100%;
+  height: 48px;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.newsletterButton:hover {
+  opacity: 0.85;
+}
+
+/* ============================================
+   Tablet — 768px
+   ============================================ */
+
+@media (min-width: 768px) {
+  .heroLogo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .heroTitle {
+    font-size: var(--text-5xl);
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .sectionTitle {
+    font-size: var(--text-4xl);
+  }
+
+  .ethosInner {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-6xl) var(--container-padding);
+  }
+
+  .ethosText {
+    flex: 1;
+  }
+
+  .ethosHeadline {
+    font-size: var(--text-4xl);
+  }
+
+  .ethosVisual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 400px;
+  }
+
+  .collectionsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .collectionInner {
+    aspect-ratio: 3 / 4;
+  }
+
+  .editorialSign {
+    width: 360px;
+  }
+
+  .newsletterForm {
+    flex-direction: row;
+  }
+
+  .newsletterButton {
+    width: auto;
+    padding: 0 var(--space-xl);
+    flex-shrink: 0;
+  }
+}
+
+/* ============================================
+   Desktop — 1200px
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .heroLogo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .heroTitle {
+    font-size: var(--text-hero);
+  }
+
+  .sectionTitle {
+    font-size: var(--text-5xl);
+  }
+
+  .ethosHeadline {
+    font-size: var(--text-5xl);
+  }
+
+  .editorialSign {
+    width: 440px;
+  }
+}

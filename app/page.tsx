@@ -1,65 +1,262 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { getFeaturedProducts, getNewArrivals } from '@/lib/products';
+import styles from './page.module.css';
+
+const collections = [
+  {
+    name: 'The Essentials',
+    slug: 'the-essentials',
+    description: 'Timeless foundations built to last.',
+  },
+  {
+    name: 'New Season',
+    slug: 'new-season',
+    description: 'Current mood. Elevated essentials.',
+  },
+  {
+    name: 'The Edit',
+    slug: 'the-edit',
+    description: 'Curated. Considered. Complete.',
+  },
+];
 
 export default function Home() {
+  const featured = getFeaturedProducts().slice(0, 4);
+  const newArrivals = getNewArrivals().slice(0, 4);
+  const displayProducts = newArrivals.length >= 4 ? newArrivals : featured;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className={styles.page}>
+      {/* ============================================
+         Hero
+         ============================================ */}
+      <section className={styles.hero}>
+        <div className={styles.heroPattern} aria-hidden="true" />
+        <div className={styles.heroContent}>
+          <img
+            src="/brand/logo-white.svg"
+            alt="FAY"
+            className={styles.heroLogo}
+          />
+          <h1 className={styles.heroTitle}>Wear Confidence</h1>
+          <Link href="/shop" className={styles.heroLink}>
+            Discover the Collection
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+        <div className={styles.heroScroll} aria-hidden="true">
+          <span>Scroll</span>
+          <div className={styles.heroScrollLine} />
+        </div>
+      </section>
+
+      {/* ============================================
+         Featured Products
+         ============================================ */}
+      <section className={styles.featured}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>New Arrivals</h2>
+          <p className={styles.sectionSubtitle}>Same confidence.</p>
+        </div>
+
+        <div className={styles.productGrid}>
+          {displayProducts.map((product) => (
+            <Link
+              key={product.id}
+              href={`/shop`}
+              className={styles.productCard}
+            >
+              <div className={styles.productImageWrap}>
+                <div className={styles.productImage}>
+                  <div className={styles.productImagePattern} aria-hidden="true" />
+                </div>
+                {product.isNew && (
+                  <span className={styles.productBadge}>New</span>
+                )}
+              </div>
+              <div className={styles.productInfo}>
+                <span className={styles.productName}>{product.name}</span>
+                <span className={styles.productPrice}>
+                  ${product.price.toLocaleString()}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className={styles.sectionCta}>
+          <Link href="/shop" className={styles.ctaLink}>
+            View All
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 7h10M8 3l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      {/* ============================================
+         Brand Ethos
+         ============================================ */}
+      <section className={styles.ethos}>
+        <div className={styles.ethosPattern} aria-hidden="true" />
+        <div className={styles.ethosInner}>
+          <div className={styles.ethosText}>
+            <p className={styles.ethosHeadline}>
+              Less noise.<br />
+              More presence.
+            </p>
+            <p className={styles.ethosBody}>
+              FAY is a modern fashion house crafting refined, everyday
+              essentials for those who dress with intention. Quality fabrics,
+              precise construction, quiet confidence.
+            </p>
+            <Link href="/about" className={styles.ethosLink}>
+              About FAY
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 7h10M8 3l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          </div>
+          <div className={styles.ethosVisual}>
+            <img
+              src="/brand/pattern-secondary.svg"
+              alt=""
+              className={styles.ethosVisualImg}
+              aria-hidden="true"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* ============================================
+         Collections
+         ============================================ */}
+      <section className={styles.collections}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Collections</h2>
+        </div>
+
+        <div className={styles.collectionsGrid}>
+          {collections.map((collection) => (
+            <Link
+              key={collection.slug}
+              href={`/shop?collection=${collection.slug}`}
+              className={styles.collectionCard}
+            >
+              <div className={styles.collectionInner}>
+                <div
+                  className={styles.collectionPattern}
+                  aria-hidden="true"
+                />
+                <div className={styles.collectionContent}>
+                  <h3 className={styles.collectionName}>{collection.name}</h3>
+                  <p className={styles.collectionDesc}>
+                    {collection.description}
+                  </p>
+                  <span className={styles.collectionLink}>
+                    Explore
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M2 6h8M7 3l3 3-3 3"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================================
+         Editorial Band
+         ============================================ */}
+      <section className={styles.editorial}>
+        <img
+          src="/brand/brand-sign.svg"
+          alt="FAY"
+          className={styles.editorialSign}
+        />
+        <p className={styles.editorialText}>
+          Designed to be worn. Styled to be remembered.
+        </p>
+      </section>
+
+      {/* ============================================
+         Newsletter
+         ============================================ */}
+      <section className={styles.newsletter}>
+        <div className={styles.newsletterPattern} aria-hidden="true" />
+        <div className={styles.newsletterInner}>
+          <h2 className={styles.newsletterTitle}>Stay Informed</h2>
+          <p className={styles.newsletterDesc}>
+            New arrivals, exclusive access, and considered style.
+          </p>
+          <form
+            className={styles.newsletterForm}
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              placeholder="Email address"
+              className={styles.newsletterInput}
+              aria-label="Email address"
+              required
+            />
+            <button type="submit" className={styles.newsletterButton}>
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }
