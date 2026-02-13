@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getFeaturedProducts, getNewArrivals } from '@/lib/products';
+import { NewsletterForm } from '@/components/ui/NewsletterForm';
 import styles from './page.module.css';
 
 const collections = [
@@ -240,21 +241,7 @@ export default function Home() {
           <p className={styles.newsletterDesc}>
             New arrivals, exclusive access, and considered style.
           </p>
-          <form
-            className={styles.newsletterForm}
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              placeholder="Email address"
-              className={styles.newsletterInput}
-              aria-label="Email address"
-              required
-            />
-            <button type="submit" className={styles.newsletterButton}>
-              Subscribe
-            </button>
-          </form>
+          <NewsletterForm />
         </div>
       </section>
     </div>
