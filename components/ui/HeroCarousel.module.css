@@ -1,0 +1,259 @@
+/* ============================================
+   Hero Carousel
+   ============================================ */
+
+.carousel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ============================================
+   Slides
+   ============================================ */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.slideActive {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slideImage {
+  position: absolute;
+  inset: -20px;
+  background-size: cover;
+  background-position: center;
+  animation: kenBurns 8s ease-in-out forwards;
+  will-change: transform;
+}
+
+.slideActive .slideImage {
+  animation: kenBurns 8s ease-in-out forwards;
+}
+
+/* Ken Burns — subtle zoom & drift per slide */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1.08) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.15) translate(-0.5%, -0.5%);
+  }
+}
+
+/* Alternate Ken Burns directions for visual variety */
+.slide:nth-child(2) .slideImage {
+  animation-name: kenBurns2;
+}
+
+.slide:nth-child(3) .slideImage {
+  animation-name: kenBurns3;
+}
+
+.slide:nth-child(4) .slideImage {
+  animation-name: kenBurns4;
+}
+
+.slide:nth-child(5) .slideImage {
+  animation-name: kenBurns5;
+}
+
+@keyframes kenBurns2 {
+  0% {
+    transform: scale(1.1) translate(0.5%, 0);
+  }
+  100% {
+    transform: scale(1.18) translate(-0.3%, -0.5%);
+  }
+}
+
+@keyframes kenBurns3 {
+  0% {
+    transform: scale(1.05) translate(-0.5%, -0.3%);
+  }
+  100% {
+    transform: scale(1.14) translate(0.3%, 0.2%);
+  }
+}
+
+@keyframes kenBurns4 {
+  0% {
+    transform: scale(1.1) translate(0, 0.5%);
+  }
+  100% {
+    transform: scale(1.16) translate(-0.5%, -0.3%);
+  }
+}
+
+@keyframes kenBurns5 {
+  0% {
+    transform: scale(1.06) translate(0.3%, -0.3%);
+  }
+  100% {
+    transform: scale(1.14) translate(-0.2%, 0.3%);
+  }
+}
+
+/* ============================================
+   Contrast Overlays — ensure text is always readable
+   ============================================ */
+
+/* Primary gradient: heavy at bottom for text, lighter at top */
+.overlayGradient {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.05) 30%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.4) 75%,
+      rgba(0, 0, 0, 0.65) 100%
+    );
+  pointer-events: none;
+}
+
+/* Vignette for cinematic depth */
+.overlayVignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.45) 100%
+    );
+  pointer-events: none;
+}
+
+/* ============================================
+   Slide Indicators — minimal bar style
+   ============================================ */
+
+.indicators {
+  position: absolute;
+  bottom: var(--space-3xl);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.indicator:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.indicatorBar {
+  position: relative;
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  transition: width var(--transition-base);
+}
+
+.indicatorActive .indicatorBar {
+  width: 48px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.indicatorProgress {
+  position: absolute;
+  inset: 0;
+  background: var(--color-white);
+  transform-origin: left center;
+  animation: indicatorFill linear forwards;
+}
+
+@keyframes indicatorFill {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================
+   Tablet — 768px
+   ============================================ */
+
+@media (min-width: 768px) {
+  .indicators {
+    bottom: var(--space-3xl);
+    gap: var(--space-sm);
+  }
+
+  .indicatorBar {
+    width: 40px;
+  }
+
+  .indicatorActive .indicatorBar {
+    width: 56px;
+  }
+}
+
+/* ============================================
+   Desktop — 1200px
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .indicators {
+    bottom: var(--space-4xl);
+    gap: 10px;
+  }
+
+  .indicatorBar {
+    width: 44px;
+    height: 2px;
+  }
+
+  .indicatorActive .indicatorBar {
+    width: 64px;
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition: opacity 0.3s ease;
+  }
+
+  .slideImage {
+    animation: none !important;
+  }
+
+  .indicatorProgress {
+    animation-duration: 0.1s !important;
+    transform: scaleX(1);
+  }
+}

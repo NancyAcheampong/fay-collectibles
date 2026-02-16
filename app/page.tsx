@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getFeaturedProducts, getNewArrivals } from '@/lib/products';
 import { NewsletterForm } from '@/components/ui/NewsletterForm';
+import { HeroCarousel } from '@/components/ui/HeroCarousel';
 import styles from './page.module.css';
 
 const collections = [
@@ -38,10 +39,10 @@ export default function Home() {
   return (
     <div className={styles.page}>
       {/* ============================================
-         Hero
+         Hero — Full-screen carousel with text overlay
          ============================================ */}
       <section className={styles.hero}>
-        <div className={styles.heroGlow} aria-hidden="true" />
+        <HeroCarousel />
         <div className={styles.heroContent}>
           <p className={styles.heroSubtitle}>FAY Collectibles</p>
           <h1 className={styles.heroTitle}>
