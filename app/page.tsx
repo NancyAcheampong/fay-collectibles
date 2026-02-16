@@ -41,10 +41,8 @@ export default function Home() {
          Hero
          ============================================ */}
       <section className={styles.hero}>
-        <div className={styles.heroPattern} aria-hidden="true" />
-        <div className={styles.heroGradient} aria-hidden="true" />
+        <div className={styles.heroGlow} aria-hidden="true" />
         <div className={styles.heroContent}>
-          <div className={styles.heroAccentLine} aria-hidden="true" />
           <p className={styles.heroSubtitle}>FAY Collectibles</p>
           <h1 className={styles.heroTitle}>
             <span className={styles.heroTitleLine}>Wear</span>
@@ -101,7 +99,6 @@ export default function Home() {
         <div className={styles.sectionHeader}>
           <span className={styles.sectionLabel}>Curated Selection</span>
           <h2 className={styles.sectionTitle}>New Arrivals</h2>
-          <div className={styles.sectionRule} aria-hidden="true" />
         </div>
 
         <div className={styles.productGrid}>
@@ -112,9 +109,7 @@ export default function Home() {
               className={styles.productCard}
             >
               <div className={styles.productImageWrap}>
-                <div className={styles.productImage}>
-                  <div className={styles.productImagePattern} aria-hidden="true" />
-                </div>
+                <div className={styles.productImage} />
                 <div className={styles.productOverlay}>
                   <span className={styles.productOverlayText}>View Details</span>
                 </div>
@@ -158,7 +153,6 @@ export default function Home() {
          Brand Ethos
          ============================================ */}
       <section className={styles.ethos}>
-        <div className={styles.ethosPattern} aria-hidden="true" />
         <div className={styles.ethosInner}>
           <div className={styles.ethosText}>
             <span className={styles.ethosLabel}>Our Philosophy</span>
@@ -166,7 +160,6 @@ export default function Home() {
               Less noise.<br />
               More presence.
             </p>
-            <div className={styles.ethosRule} aria-hidden="true" />
             <p className={styles.ethosBody}>
               FAY is a modern fashion house crafting refined, everyday
               essentials for those who dress with intention. Quality fabrics,
@@ -191,14 +184,18 @@ export default function Home() {
               </svg>
             </Link>
           </div>
-          <div className={styles.ethosVisual}>
-            <div className={styles.ethosVisualFrame}>
-              <img
-                src="/brand/pattern-secondary.svg"
-                alt=""
-                className={styles.ethosVisualImg}
-                aria-hidden="true"
-              />
+          <div className={styles.ethosMetrics}>
+            <div className={styles.metric}>
+              <span className={styles.metricValue}>100%</span>
+              <span className={styles.metricLabel}>Premium fabrics</span>
+            </div>
+            <div className={styles.metric}>
+              <span className={styles.metricValue}>12</span>
+              <span className={styles.metricLabel}>Curated pieces</span>
+            </div>
+            <div className={styles.metric}>
+              <span className={styles.metricValue}>3</span>
+              <span className={styles.metricLabel}>Collections</span>
             </div>
           </div>
         </div>
@@ -211,7 +208,6 @@ export default function Home() {
         <div className={styles.sectionHeader}>
           <span className={styles.sectionLabel}>Explore</span>
           <h2 className={styles.sectionTitle}>Collections</h2>
-          <div className={styles.sectionRule} aria-hidden="true" />
         </div>
 
         <div className={styles.collectionsGrid}>
@@ -222,11 +218,7 @@ export default function Home() {
               className={`${styles.collectionCard} ${index === 0 ? styles.collectionCardLarge : ''}`}
             >
               <div className={styles.collectionInner}>
-                <div
-                  className={styles.collectionPattern}
-                  aria-hidden="true"
-                />
-                <div className={styles.collectionGlass}>
+                <div className={styles.collectionContent}>
                   <span className={styles.collectionNumber}>0{index + 1}</span>
                   <h3 className={styles.collectionName}>{collection.name}</h3>
                   <p className={styles.collectionDesc}>
@@ -262,7 +254,6 @@ export default function Home() {
          ============================================ */}
       <section className={styles.editorial}>
         <div className={styles.editorialInner}>
-          <div className={styles.editorialRule} aria-hidden="true" />
           <img
             src="/brand/brand-sign.svg"
             alt="FAY"
@@ -271,7 +262,6 @@ export default function Home() {
           <p className={styles.editorialText}>
             Designed to be worn. Styled to be remembered.
           </p>
-          <div className={styles.editorialRule} aria-hidden="true" />
         </div>
       </section>
 
@@ -279,7 +269,6 @@ export default function Home() {
          Newsletter
          ============================================ */}
       <section className={styles.newsletter}>
-        <div className={styles.newsletterPattern} aria-hidden="true" />
         <div className={styles.newsletterInner}>
           <span className={styles.newsletterLabel}>Stay Connected</span>
           <h2 className={styles.newsletterTitle}>Join the Inner Circle</h2>

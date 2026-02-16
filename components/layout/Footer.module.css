@@ -3,34 +3,15 @@
    ============================================ */
 
 .footer {
-  position: relative;
-  background-color: var(--color-black);
+  background-color: var(--color-primary);
   color: var(--color-white);
-  overflow: hidden;
 }
 
 .inner {
-  position: relative;
-  z-index: 2;
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--space-4xl) var(--container-padding) var(--space-2xl);
-}
-
-/* ============================================
-   Pattern Overlay
-   ============================================ */
-
-.patternOverlay {
-  position: absolute;
-  inset: 0;
-  background-image: url('/brand/pattern-light.svg');
-  background-repeat: repeat;
-  background-size: 540px auto;
-  opacity: 0.025;
-  pointer-events: none;
-  z-index: 1;
 }
 
 /* ============================================
@@ -59,7 +40,7 @@
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: rgba(255, 255, 255, 0.4);
   font-weight: var(--font-weight-light);
 }
 
@@ -95,14 +76,14 @@
 
 .columnLink {
   font-size: var(--text-sm);
-  color: var(--color-warm-gray);
+  color: rgba(255, 255, 255, 0.4);
   transition: color var(--transition-fast);
   letter-spacing: var(--tracking-wide);
   font-weight: var(--font-weight-light);
 }
 
 .columnLink:hover {
-  color: var(--color-accent-light);
+  color: var(--color-white);
 }
 
 /* ============================================
@@ -112,12 +93,7 @@
 .divider {
   width: 100%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(201, 169, 110, 0.2),
-    transparent
-  );
+  background-color: rgba(255, 255, 255, 0.08);
   margin: var(--space-3xl) 0 var(--space-xl);
 }
 
@@ -129,7 +105,7 @@
 
 .copyright {
   font-size: var(--text-xs);
-  color: var(--color-warm-gray);
+  color: rgba(255, 255, 255, 0.3);
   letter-spacing: var(--tracking-wide);
   font-weight: var(--font-weight-light);
 }
@@ -141,14 +117,14 @@
 
 .legalLink {
   font-size: var(--text-xs);
-  color: var(--color-warm-gray);
+  color: rgba(255, 255, 255, 0.3);
   letter-spacing: var(--tracking-wide);
   transition: color var(--transition-fast);
   font-weight: var(--font-weight-light);
 }
 
 .legalLink:hover {
-  color: var(--color-accent-light);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* ============================================

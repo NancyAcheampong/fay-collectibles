@@ -94,7 +94,6 @@ export function Footer() {
         </div>
       </div>
 
-      <div className={styles.patternOverlay} aria-hidden="true" />
     </footer>
   );
 }

@@ -1,7 +1,7 @@
 .bar {
   width: 100%;
   height: var(--announcement-height);
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  background-color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,6 @@
   left: 0;
   right: 0;
   z-index: var(--z-sticky);
-  border-bottom: 1px solid rgba(201, 169, 110, 0.1);
 }
 
 .container {
@@ -24,7 +23,7 @@
 }
 
 .text {
-  color: var(--color-accent-light);
+  color: rgba(255, 255, 255, 0.6);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;

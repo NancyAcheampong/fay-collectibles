@@ -100,9 +100,7 @@ export function ShopContent({ products }: { products: Product[] }) {
         {filtered.map((product) => (
           <div key={product.id} className={styles.card}>
             <div className={styles.cardImageWrap}>
-              <div className={styles.cardImage}>
-                <div className={styles.cardImagePattern} aria-hidden="true" />
-              </div>
+              <div className={styles.cardImage} />
               {product.isNew && (
                 <span className={styles.cardBadge}>New</span>
               )}
