@@ -59,8 +59,8 @@
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-secondary);
-  font-weight: var(--font-weight-regular);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-light);
 }
 
 /* ============================================
@@ -95,13 +95,14 @@
 
 .columnLink {
   font-size: var(--text-sm);
-  color: var(--color-secondary);
+  color: var(--color-warm-gray);
   transition: color var(--transition-fast);
   letter-spacing: var(--tracking-wide);
+  font-weight: var(--font-weight-light);
 }
 
 .columnLink:hover {
-  color: var(--color-white);
+  color: var(--color-accent-light);
 }
 
 /* ============================================
@@ -111,7 +112,12 @@
 .divider {
   width: 100%;
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 169, 110, 0.2),
+    transparent
+  );
   margin: var(--space-3xl) 0 var(--space-xl);
 }
 
@@ -123,8 +129,9 @@
 
 .copyright {
   font-size: var(--text-xs);
-  color: var(--color-secondary);
+  color: var(--color-warm-gray);
   letter-spacing: var(--tracking-wide);
+  font-weight: var(--font-weight-light);
 }
 
 .legal {
@@ -134,13 +141,14 @@
 
 .legalLink {
   font-size: var(--text-xs);
-  color: var(--color-secondary);
+  color: var(--color-warm-gray);
   letter-spacing: var(--tracking-wide);
   transition: color var(--transition-fast);
+  font-weight: var(--font-weight-light);
 }
 
 .legalLink:hover {
-  color: var(--color-white);
+  color: var(--color-accent-light);
 }
 
 /* ============================================

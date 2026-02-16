@@ -56,7 +56,7 @@
 }
 
 .breadcrumbLink:hover {
-  color: var(--text-primary);
+  color: var(--color-accent);
 }
 
 .breadcrumbSeparator {
