@@ -1,0 +1,310 @@
+/* ============================================
+   Lookbook Page
+   ============================================ */
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ============================================
+   Hero
+   ============================================ */
+
+.hero {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-5xl) var(--container-padding);
+}
+
+.heroInner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+  text-align: center;
+}
+
+.heroLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.heroTitle {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.heroDesc {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 480px;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ============================================
+   Looks Grid
+   ============================================ */
+
+.looks {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-4xl) var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4xl);
+}
+
+.look {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+/* Full-width look */
+.lookImageFull {
+  overflow: hidden;
+}
+
+.lookImageFull .lookImagePlaceholder {
+  aspect-ratio: 21 / 9;
+  background: linear-gradient(145deg, #1a1a1a 0%, #252525 40%, #1e1e1e 100%);
+}
+
+/* Half-width look */
+.lookImageHalf {
+  overflow: hidden;
+}
+
+.lookImageHalf .lookImagePlaceholder {
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(145deg, #e8e8e8 0%, #d8d8d8 50%, #e0e0e0 100%);
+}
+
+/* Alternate background tones for variety */
+.look:nth-child(2) .lookImagePlaceholder {
+  background: linear-gradient(145deg, #eae8e4 0%, #dcd8d2 50%, #e2deda 100%);
+}
+
+.look:nth-child(3) .lookImagePlaceholder {
+  background: linear-gradient(145deg, #e4e6ea 0%, #d2d6dc 50%, #dae0e2 100%);
+}
+
+.look:nth-child(5) .lookImagePlaceholder {
+  background: linear-gradient(145deg, #e8e6e2 0%, #dcd8d0 50%, #e0dcd8 100%);
+}
+
+.look:nth-child(6) .lookImagePlaceholder {
+  background: linear-gradient(145deg, #e2e4e8 0%, #d4d8de 50%, #dce0e4 100%);
+}
+
+.lookContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.lookNumber {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.lookTitle {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.lookDesc {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-secondary);
+  max-width: 520px;
+}
+
+/* Featured products */
+.lookProducts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  padding-top: var(--space-sm);
+}
+
+.lookProductsLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  width: 100%;
+  margin-bottom: var(--space-xs);
+}
+
+.lookProduct {
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+  padding: 6px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
+   CTA
+   ============================================ */
+
+.cta {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-5xl) var(--container-padding);
+}
+
+.ctaInner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+}
+
+.ctaTitle {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.ctaDesc {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: var(--tracking-wide);
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 36px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.ctaButton:hover {
+  background-color: var(--color-light);
+  transform: translateY(-1px);
+}
+
+.ctaButton svg {
+  transition: transform var(--transition-base);
+}
+
+.ctaButton:hover svg {
+  transform: translateX(3px);
+}
+
+/* ============================================
+   Tablet — 768px
+   ============================================ */
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: var(--text-5xl);
+  }
+
+  .heroDesc {
+    font-size: var(--text-base);
+  }
+
+  .lookHalf {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-3xl);
+  }
+
+  .lookHalf:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+
+  .lookImageHalf {
+    flex: 1;
+  }
+
+  .lookHalf .lookContent {
+    flex: 1;
+  }
+
+  .lookTitle {
+    font-size: var(--text-3xl);
+  }
+
+  .lookImageFull .lookImagePlaceholder {
+    aspect-ratio: 21 / 9;
+  }
+
+  .lookFull .lookContent {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+  }
+
+  .lookFull .lookProducts {
+    justify-content: center;
+  }
+
+  .lookFull .lookProductsLabel {
+    text-align: center;
+  }
+
+  .ctaTitle {
+    font-size: var(--text-3xl);
+  }
+}
+
+/* ============================================
+   Desktop — 1200px
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .heroTitle {
+    font-size: var(--text-6xl);
+  }
+
+  .lookHalf {
+    gap: var(--space-4xl);
+  }
+
+  .lookTitle {
+    font-size: var(--text-4xl);
+  }
+
+  .lookDesc {
+    font-size: var(--text-base);
+  }
+
+  .ctaTitle {
+    font-size: var(--text-4xl);
+  }
+}

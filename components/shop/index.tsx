@@ -99,15 +99,15 @@ export function ShopContent({ products }: { products: Product[] }) {
       <div className={styles.grid}>
         {filtered.map((product) => (
           <div key={product.id} className={styles.card}>
-            <div className={styles.cardImageWrap}>
+            <Link href={`/product/${product.slug}`} className={styles.cardImageWrap}>
               <div className={styles.cardImage} />
               {product.isNew && (
                 <span className={styles.cardBadge}>New</span>
               )}
-            </div>
+            </Link>
 
             <div className={styles.cardInfo}>
-              <span className={styles.cardName}>{product.name}</span>
+              <Link href={`/product/${product.slug}`} className={styles.cardName}>{product.name}</Link>
               <span className={styles.cardPrice}>
                 ${product.price.toLocaleString()}
               </span>

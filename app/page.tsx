@@ -105,7 +105,7 @@ export default function Home() {
           {displayProducts.map((product) => (
             <Link
               key={product.id}
-              href={`/shop`}
+              href={`/product/${product.slug}`}
               className={styles.productCard}
             >
               <div className={styles.productImageWrap}>
@@ -214,7 +214,7 @@ export default function Home() {
           {collections.map((collection, index) => (
             <Link
               key={collection.slug}
-              href={`/shop?collection=${collection.slug}`}
+              href={`/collections`}
               className={`${styles.collectionCard} ${index === 0 ? styles.collectionCardLarge : ''}`}
             >
               <div className={styles.collectionInner}>
