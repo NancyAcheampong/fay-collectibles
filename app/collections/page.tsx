@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getProductsByCollection } from '@/lib/products';
+import { CollectionAccordion } from '@/components/collections';
+import type { CollectionItem } from '@/components/collections';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -9,7 +11,7 @@ export const metadata: Metadata = {
     'Explore FAY Collectibles curated collections. From timeless essentials to seasonal pieces and curated edits.',
 };
 
-const collections = [
+const collectionsData = [
   {
     name: 'The Essentials',
     slug: 'the-essentials',
@@ -37,14 +39,32 @@ const collections = [
 ];
 
 export default function CollectionsPage() {
+  const collections: CollectionItem[] = collectionsData.map((c) => {
+    const products = getProductsByCollection(c.filter);
+    return {
+      name: c.name,
+      slug: c.slug,
+      tagline: c.tagline,
+      description: c.description,
+      productCount: products.length,
+      priceRange:
+        products.length > 0
+          ? `$${Math.min(...products.map((p) => p.price))} — $${Math.max(...products.map((p) => p.price))}`
+          : '',
+    };
+  });
+
   return (
     <div className={styles.page}>
-      {/* Hero */}
+      {/* Header strip */}
       <section className={styles.hero}>
+        <h1 className={styles.title}>Collections</h1>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <ol className={styles.breadcrumbList}>
             <li className={styles.breadcrumbItem}>
-              <Link href="/" className={styles.breadcrumbLink}>Home</Link>
+              <Link href="/" className={styles.breadcrumbLink}>
+                Home
+              </Link>
             </li>
             <li className={styles.breadcrumbSep} aria-hidden="true">/</li>
             <li className={styles.breadcrumbItem}>
@@ -54,68 +74,31 @@ export default function CollectionsPage() {
             </li>
           </ol>
         </nav>
-        <h1 className={styles.title}>Collections</h1>
-        <p className={styles.subtitle}>
-          Three distinct perspectives on modern luxury. Each collection is
-          designed with intention — a wardrobe, not a catalogue.
-        </p>
       </section>
 
-      {/* Collection Cards */}
+      {/* Accordion strips */}
       <section className={styles.collectionsSection}>
-        {collections.map((collection, index) => {
-          const products = getProductsByCollection(collection.filter);
-          const productCount = products.length;
-          const priceRange = products.length > 0
-            ? `$${Math.min(...products.map((p) => p.price))} — $${Math.max(...products.map((p) => p.price))}`
-            : '';
-
-          return (
-            <div key={collection.slug} className={styles.collectionBlock}>
-              <div className={styles.collectionImage}>
-                <div className={styles.collectionImagePlaceholder} />
-              </div>
-              <div className={styles.collectionInfo}>
-                <span className={styles.collectionNumber}>0{index + 1}</span>
-                <h2 className={styles.collectionName}>{collection.name}</h2>
-                <p className={styles.collectionTagline}>{collection.tagline}</p>
-                <p className={styles.collectionDesc}>{collection.description}</p>
-                <div className={styles.collectionMeta}>
-                  <span className={styles.metaItem}>
-                    {productCount} {productCount === 1 ? 'piece' : 'pieces'}
-                  </span>
-                  {priceRange && (
-                    <>
-                      <span className={styles.metaDot} />
-                      <span className={styles.metaItem}>{priceRange}</span>
-                    </>
-                  )}
-                </div>
-                <Link
-                  href={`/shop?collection=${collection.slug}`}
-                  className={styles.collectionLink}
-                >
-                  Explore Collection
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          );
-        })}
+        <CollectionAccordion collections={collections} />
       </section>
 
       {/* Bottom CTA */}
       <section className={styles.bottomCta}>
-        <h2 className={styles.bottomCtaTitle}>View All Products</h2>
-        <p className={styles.bottomCtaDesc}>
-          Browse our complete range across all collections.
-        </p>
         <Link href="/shop" className={styles.bottomCtaButton}>
-          Shop All
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+          Shop All Products
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </Link>
       </section>
