@@ -69,42 +69,47 @@ export function CollectionAccordion({
               style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
             >
               <div className={styles.stripBodyInner}>
-                <p className={styles.description}>{collection.description}</p>
-                <div className={styles.meta}>
-                  <span className={styles.metaItem}>
-                    {collection.productCount}{' '}
-                    {collection.productCount === 1 ? 'piece' : 'pieces'}
-                  </span>
-                  {collection.priceRange && (
-                    <>
-                      <span className={styles.metaDot} />
-                      <span className={styles.metaItem}>
-                        {collection.priceRange}
-                      </span>
-                    </>
-                  )}
-                </div>
-                <Link
-                  href={`/shop?collection=${collection.slug}`}
-                  className={styles.exploreLink}
-                >
-                  Explore Collection
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    aria-hidden="true"
+                <div className={styles.imagePlaceholder} />
+                <div className={styles.bodyText}>
+                  <p className={styles.description}>
+                    {collection.description}
+                  </p>
+                  <div className={styles.meta}>
+                    <span className={styles.metaItem}>
+                      {collection.productCount}{' '}
+                      {collection.productCount === 1 ? 'piece' : 'pieces'}
+                    </span>
+                    {collection.priceRange && (
+                      <>
+                        <span className={styles.metaDot} />
+                        <span className={styles.metaItem}>
+                          {collection.priceRange}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  <Link
+                    href={`/shop?collection=${collection.slug}`}
+                    className={styles.exploreLink}
                   >
-                    <path
-                      d="M3 8h10M9 4l4 4-4 4"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </Link>
+                    Explore Collection
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

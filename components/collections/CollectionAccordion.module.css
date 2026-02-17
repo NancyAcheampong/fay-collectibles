@@ -96,6 +96,29 @@
   padding-bottom: var(--space-xl);
 }
 
+/* ============================================
+   Image Placeholder
+   ============================================ */
+
+.imagePlaceholder {
+  aspect-ratio: 16 / 7;
+  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 50%, #1e1e1e 100%);
+}
+
+.strip:nth-child(2) .imagePlaceholder {
+  background: linear-gradient(145deg, #1e1e24 0%, #28282e 50%, #202024 100%);
+}
+
+.strip:nth-child(3) .imagePlaceholder {
+  background: linear-gradient(145deg, #22201e 0%, #2c2a28 50%, #242220 100%);
+}
+
+.bodyText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
 .description {
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
@@ -182,6 +205,21 @@
     text-transform: uppercase;
     color: var(--color-secondary);
   }
+
+  .stripBodyInner {
+    flex-direction: row;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .imagePlaceholder {
+    flex: 0 0 240px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .bodyText {
+    flex: 1;
+  }
 }
 
 /* ============================================
@@ -195,6 +233,10 @@
 
   .stripTagline {
     font-size: var(--text-sm);
+  }
+
+  .imagePlaceholder {
+    flex: 0 0 320px;
   }
 
   .description {
