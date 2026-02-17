@@ -7,16 +7,216 @@
 }
 
 /* ============================================
-   Filters
+   Filter Bar — compact top row
    ============================================ */
 
-.filters {
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.filterTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 16px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.filterTrigger:hover {
+  border-color: var(--color-primary);
+}
+
+.filterBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* Active filter pills */
+.activePills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-primary);
+  background-color: var(--color-light);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.pill:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.pill svg {
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+}
+
+.pill:hover svg {
+  opacity: 1;
+}
+
+.clearAll {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color var(--transition-fast);
+}
+
+.clearAll:hover {
+  color: var(--color-primary);
+}
+
+/* Result count — pushed to far right */
+.resultCount {
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ============================================
+   Filter Modal — Overlay
+   ============================================ */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: overlayIn 200ms ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ============================================
+   Filter Modal — Panel
+   ============================================ */
+
+.modal {
+  position: relative;
+  width: calc(100% - var(--space-xl) * 2);
+  max-width: 480px;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-xl);
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-2xl);
-  padding-bottom: var(--space-xl);
+  animation: modalIn 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
   border-bottom: 1px solid var(--border-color);
+}
+
+.modalTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.modalClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-secondary);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.modalClose:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   Filter Modal — Body (grows with content)
+   ============================================ */
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding: var(--space-xl);
+  overflow-y: auto;
+  max-height: 60vh;
 }
 
 .filterGroup {
@@ -33,14 +233,14 @@
   color: var(--color-secondary);
 }
 
-.filterTabs {
+.filterOptions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
 }
 
-.filterTab {
-  padding: 6px 16px;
+.filterOption {
+  padding: 8px 18px;
   font-size: var(--text-xs);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-wider);
@@ -56,27 +256,72 @@
     background-color var(--transition-fast);
 }
 
-.filterTab:hover {
+.filterOption:hover {
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
-.filterTabActive {
+.filterOptionActive {
   color: var(--color-white);
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
 /* ============================================
-   Results Count
+   Filter Modal — Footer
    ============================================ */
 
-.resultCount {
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--border-color);
+}
+
+.modalClear {
   font-size: var(--text-xs);
-  color: var(--color-secondary);
-  letter-spacing: var(--tracking-wider);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  margin-bottom: var(--space-xl);
+  color: var(--color-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color var(--transition-fast);
+}
+
+.modalClear:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.modalClear:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.modalApply {
+  padding: 12px 28px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.modalApply:hover {
+  background-color: var(--color-black);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* ============================================
@@ -287,15 +532,13 @@
    ============================================ */
 
 @media (min-width: 768px) {
-  .filters {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
   .grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-2xl) var(--space-xl);
+  }
+
+  .modal {
+    max-width: 520px;
   }
 }
 
@@ -306,5 +549,19 @@
 @media (min-width: 1200px) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .modalOverlay {
+    animation: none;
+  }
+
+  .modal {
+    animation: none;
   }
 }
