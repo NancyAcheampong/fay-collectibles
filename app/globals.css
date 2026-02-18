@@ -82,7 +82,7 @@
   /* Layout */
   --container-max: 1440px;
   --container-padding: 1.5rem;
-  --header-height: 64px;
+  --header-height: 48px;
   --announcement-height: 36px;
 
   /* Transitions */
@@ -244,13 +244,13 @@ button {
 @media (min-width: 768px) {
   :root {
     --container-padding: 3rem;
-    --header-height: 72px;
+    --header-height: 56px;
   }
 }
 
 @media (min-width: 1200px) {
   :root {
     --container-padding: 4rem;
-    --header-height: 80px;
+    --header-height: 60px;
   }
 }
