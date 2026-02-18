@@ -162,12 +162,19 @@
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
-  transition: transform var(--transition-luxury) cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
+  opacity: 0;
+  box-shadow: none;
+  transition:
+    transform var(--transition-luxury),
+    opacity 400ms ease,
+    box-shadow 500ms ease;
+  will-change: transform, opacity;
 }
 
 .modalOpen {
   transform: translateX(0);
+  opacity: 1;
+  box-shadow: var(--shadow-xl);
 }
 
 .modalHeader {
@@ -553,5 +560,9 @@
   .modalOverlay,
   .modal {
     transition: none;
+  }
+
+  .modal {
+    opacity: 1;
   }
 }

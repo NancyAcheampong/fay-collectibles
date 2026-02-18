@@ -32,13 +32,19 @@
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform var(--transition-luxury) cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-  box-shadow: var(--shadow-xl);
+  opacity: 0;
+  box-shadow: none;
+  transition:
+    transform var(--transition-luxury),
+    opacity 400ms ease,
+    box-shadow 500ms ease;
+  will-change: transform, opacity;
 }
 
 .drawerOpen {
   transform: translateX(0);
+  opacity: 1;
+  box-shadow: var(--shadow-xl);
 }
 
 /* Header */
@@ -348,5 +354,20 @@
 
   .itemImage {
     width: 80px;
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .drawer {
+    transition: none;
+  }
+
+  .drawer {
+    opacity: 1;
   }
 }
