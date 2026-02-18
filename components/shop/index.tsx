@@ -184,97 +184,94 @@ export function ShopContent({ products }: { products: Product[] }) {
         </p>
       </div>
 
-      {/* Filter Modal */}
-      {isFilterOpen && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setIsFilterOpen(false)}
-          role="presentation"
-        >
-          <div
-            className={styles.modal}
-            role="dialog"
-            aria-label="Filter products"
-            aria-modal="true"
-            onClick={(e) => e.stopPropagation()}
+      {/* Filter Drawer — always rendered, toggled via class */}
+      <div
+        className={`${styles.modalOverlay} ${isFilterOpen ? styles.modalOverlayVisible : ''}`}
+        onClick={() => setIsFilterOpen(false)}
+        aria-hidden={!isFilterOpen}
+      />
+      <div
+        className={`${styles.modal} ${isFilterOpen ? styles.modalOpen : ''}`}
+        role="dialog"
+        aria-label="Filter products"
+        aria-modal={isFilterOpen}
+        aria-hidden={!isFilterOpen}
+      >
+        {/* Drawer Header */}
+        <div className={styles.modalHeader}>
+          <h2 className={styles.modalTitle}>Filters</h2>
+          <button
+            className={styles.modalClose}
+            onClick={() => setIsFilterOpen(false)}
+            aria-label="Close filters"
           >
-            {/* Modal Header */}
-            <div className={styles.modalHeader}>
-              <h2 className={styles.modalTitle}>Filters</h2>
-              <button
-                className={styles.modalClose}
-                onClick={() => setIsFilterOpen(false)}
-                aria-label="Close filters"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  aria-hidden="true"
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 5l10 10M15 5l-10 10"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Drawer Body */}
+        <div className={styles.modalBody}>
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Category</span>
+            <div className={styles.filterOptions}>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  className={`${styles.filterOption} ${activeCategory === cat ? styles.filterOptionActive : ''}`}
+                  onClick={() => setActiveCategory(cat)}
                 >
-                  <path
-                    d="M5 5l10 10M15 5l-10 10"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
+                  {cat}
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* Modal Body — grows with content */}
-            <div className={styles.modalBody}>
-              <div className={styles.filterGroup}>
-                <span className={styles.filterLabel}>Category</span>
-                <div className={styles.filterOptions}>
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      className={`${styles.filterOption} ${activeCategory === cat ? styles.filterOptionActive : ''}`}
-                      onClick={() => setActiveCategory(cat)}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className={styles.filterGroup}>
-                <span className={styles.filterLabel}>Collection</span>
-                <div className={styles.filterOptions}>
-                  {collections.map((col) => (
-                    <button
-                      key={col}
-                      className={`${styles.filterOption} ${activeCollection === col ? styles.filterOptionActive : ''}`}
-                      onClick={() => setActiveCollection(col)}
-                    >
-                      {col}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className={styles.modalFooter}>
-              <button
-                className={styles.modalClear}
-                onClick={handleClearFilters}
-                disabled={activeFilterCount === 0}
-              >
-                Clear All
-              </button>
-              <button
-                className={styles.modalApply}
-                onClick={() => setIsFilterOpen(false)}
-              >
-                Show {filtered.length} {filtered.length === 1 ? 'Piece' : 'Pieces'}
-              </button>
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Collection</span>
+            <div className={styles.filterOptions}>
+              {collections.map((col) => (
+                <button
+                  key={col}
+                  className={`${styles.filterOption} ${activeCollection === col ? styles.filterOptionActive : ''}`}
+                  onClick={() => setActiveCollection(col)}
+                >
+                  {col}
+                </button>
+              ))}
             </div>
           </div>
         </div>
-      )}
+
+        {/* Drawer Footer */}
+        <div className={styles.modalFooter}>
+          <button
+            className={styles.modalClear}
+            onClick={handleClearFilters}
+            disabled={activeFilterCount === 0}
+          >
+            Clear All
+          </button>
+          <button
+            className={styles.modalApply}
+            onClick={() => setIsFilterOpen(false)}
+          >
+            Show {filtered.length} {filtered.length === 1 ? 'Piece' : 'Pieces'}
+          </button>
+        </div>
+      </div>
 
       {/* Product Grid */}
       <div className={styles.grid}>
