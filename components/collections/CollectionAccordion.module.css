@@ -9,7 +9,7 @@
 }
 
 /* ============================================
-   Strip — collapsed row
+   Strip — each collection row
    ============================================ */
 
 .strip {
@@ -20,19 +20,44 @@
   border-top: 1px solid var(--border-color);
 }
 
+/* ============================================
+   Always-visible row: image + header
+   ============================================ */
+
+.stripRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.imagePlaceholder {
+  flex: 0 0 64px;
+  aspect-ratio: 1;
+  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 50%, #1e1e1e 100%);
+}
+
+.strip:nth-child(2) .imagePlaceholder {
+  background: linear-gradient(145deg, #1e1e24 0%, #28282e 50%, #202024 100%);
+}
+
+.strip:nth-child(3) .imagePlaceholder {
+  background: linear-gradient(145deg, #22201e 0%, #2c2a28 50%, #242220 100%);
+}
+
 .stripHeader {
   display: grid;
   grid-template-columns: 2rem 1fr auto;
   align-items: center;
   gap: var(--space-md);
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   padding: var(--space-lg) 0;
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
   color: var(--text-primary);
-  transition: background-color var(--transition-fast);
+  transition: opacity var(--transition-fast);
 }
 
 .stripHeader:hover {
@@ -72,7 +97,7 @@
 }
 
 /* ============================================
-   Strip Body — expandable detail
+   Strip Body — expandable detail (text only)
    ============================================ */
 
 .stripBody {
@@ -83,10 +108,10 @@
 .stripBodyInner {
   overflow: hidden;
   display: flex;
-  flex-direction: row;
-  align-items: start;
+  flex-direction: column;
   gap: var(--space-md);
-  padding: 0 0 0 calc(2rem + var(--space-md));
+  /* Align with text: image width + gap */
+  padding: 0 0 0 calc(64px + var(--space-md));
 }
 
 .strip:not(.stripOpen) .stripBodyInner {
@@ -95,30 +120,6 @@
 
 .stripOpen .stripBodyInner {
   padding-bottom: var(--space-xl);
-}
-
-/* ============================================
-   Image Placeholder
-   ============================================ */
-
-.imagePlaceholder {
-  flex: 0 0 100px;
-  aspect-ratio: 1;
-  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 50%, #1e1e1e 100%);
-}
-
-.strip:nth-child(2) .imagePlaceholder {
-  background: linear-gradient(145deg, #1e1e24 0%, #28282e 50%, #202024 100%);
-}
-
-.strip:nth-child(3) .imagePlaceholder {
-  background: linear-gradient(145deg, #22201e 0%, #2c2a28 50%, #242220 100%);
-}
-
-.bodyText {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
 }
 
 .description {
@@ -183,6 +184,14 @@
    ============================================ */
 
 @media (min-width: 768px) {
+  .imagePlaceholder {
+    flex: 0 0 88px;
+  }
+
+  .stripRow {
+    gap: var(--space-lg);
+  }
+
   .stripHeader {
     grid-template-columns: 2rem 1fr auto auto auto;
     padding: var(--space-xl) 0;
@@ -209,11 +218,7 @@
   }
 
   .stripBodyInner {
-    gap: var(--space-xl);
-  }
-
-  .imagePlaceholder {
-    flex: 0 0 140px;
+    padding-left: calc(88px + var(--space-lg));
   }
 }
 
@@ -222,6 +227,14 @@
    ============================================ */
 
 @media (min-width: 1200px) {
+  .imagePlaceholder {
+    flex: 0 0 104px;
+  }
+
+  .stripRow {
+    gap: var(--space-xl);
+  }
+
   .stripName {
     font-size: var(--text-lg);
   }
@@ -230,8 +243,8 @@
     font-size: var(--text-sm);
   }
 
-  .imagePlaceholder {
-    flex: 0 0 180px;
+  .stripBodyInner {
+    padding-left: calc(104px + var(--space-xl));
   }
 
   .description {
