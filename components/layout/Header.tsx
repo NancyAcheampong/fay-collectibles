@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-context';
+import { SearchModal } from '@/components/search/SearchModal';
 import styles from './Header.module.css';
 
 const categories = [
@@ -50,6 +51,7 @@ const mobileCategoryLinks = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { itemCount, openCart } = useCart();
   const megaMenuTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -155,7 +157,11 @@ export function Header() {
         {/* Right: Action icons */}
         <div className={styles.right}>
           {/* Search */}
-          <Link href="#" className={styles.iconButton} aria-label="Search">
+          <button
+            className={styles.iconButton}
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search"
+          >
             <svg
               width="20"
               height="20"
@@ -167,7 +173,7 @@ export function Header() {
               <circle cx="9" cy="9" r="6.5" stroke="currentColor" strokeWidth="1.5" />
               <line x1="13.5" y1="13.5" x2="18" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-          </Link>
+          </button>
 
           {/* Wishlist */}
           <Link
@@ -362,6 +368,9 @@ export function Header() {
           </div>
         </div>
       </div>
+
+      {/* Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }
