@@ -8,6 +8,8 @@ import styles from './ShopContent.module.css';
 
 type FilterCategory = 'All' | Product['category'];
 type FilterCollection = 'All' | Product['collection'];
+type SortOption = 'Featured' | 'Price: Low to High' | 'Price: High to Low' | 'Newest';
+type PriceRange = 'All' | 'Under $200' | '$200 – $400' | '$400 – $600' | '$600+';
 
 const categories: FilterCategory[] = [
   'All',
@@ -24,32 +26,106 @@ const collections: FilterCollection[] = [
   'The Edit',
 ];
 
+const sortOptions: SortOption[] = [
+  'Featured',
+  'Price: Low to High',
+  'Price: High to Low',
+  'Newest',
+];
+
+const priceRanges: PriceRange[] = [
+  'All',
+  'Under $200',
+  '$200 – $400',
+  '$400 – $600',
+  '$600+',
+];
+
+const allSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'One Size'];
+
+const allMaterials = ['Wool', 'Cashmere', 'Silk', 'Cotton', 'Leather'];
+
+function matchesPriceRange(price: number, range: PriceRange): boolean {
+  switch (range) {
+    case 'All': return true;
+    case 'Under $200': return price < 200;
+    case '$200 – $400': return price >= 200 && price <= 400;
+    case '$400 – $600': return price > 400 && price <= 600;
+    case '$600+': return price > 600;
+  }
+}
+
+function productHasMaterial(product: Product, material: string): boolean {
+  const keyword = material.toLowerCase();
+  return product.fabricCare.some((line) => line.toLowerCase().includes(keyword));
+}
+
 export function ShopContent({ products }: { products: Product[] }) {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('All');
   const [activeCollection, setActiveCollection] =
     useState<FilterCollection>('All');
+  const [sortBy, setSortBy] = useState<SortOption>('Featured');
+  const [priceRange, setPriceRange] = useState<PriceRange>('All');
+  const [newOnly, setNewOnly] = useState(false);
+  const [activeSize, setActiveSize] = useState<string>('All');
+  const [activeMaterial, setActiveMaterial] = useState<string>('All');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>('');
   const { addItem } = useCart();
 
   const filtered = useMemo(() => {
-    return products.filter((p) => {
+    const result = products.filter((p) => {
       const matchCategory =
         activeCategory === 'All' || p.category === activeCategory;
       const matchCollection =
         activeCollection === 'All' || p.collection === activeCollection;
-      return matchCategory && matchCollection;
+      const matchPrice = matchesPriceRange(p.price, priceRange);
+      const matchNew = !newOnly || p.isNew;
+      const matchSize =
+        activeSize === 'All' || p.sizes.includes(activeSize);
+      const matchMaterial =
+        activeMaterial === 'All' || productHasMaterial(p, activeMaterial);
+      return matchCategory && matchCollection && matchPrice && matchNew && matchSize && matchMaterial;
     });
-  }, [products, activeCategory, activeCollection]);
+
+    // Sort
+    switch (sortBy) {
+      case 'Price: Low to High':
+        result.sort((a, b) => a.price - b.price);
+        break;
+      case 'Price: High to Low':
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case 'Newest':
+        result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+        break;
+      case 'Featured':
+      default:
+        result.sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
+        break;
+    }
+
+    return result;
+  }, [products, activeCategory, activeCollection, priceRange, newOnly, activeSize, activeMaterial, sortBy]);
 
   const activeFilterCount =
     (activeCategory !== 'All' ? 1 : 0) +
-    (activeCollection !== 'All' ? 1 : 0);
+    (activeCollection !== 'All' ? 1 : 0) +
+    (priceRange !== 'All' ? 1 : 0) +
+    (newOnly ? 1 : 0) +
+    (activeSize !== 'All' ? 1 : 0) +
+    (activeMaterial !== 'All' ? 1 : 0) +
+    (sortBy !== 'Featured' ? 1 : 0);
 
   const handleClearFilters = useCallback(() => {
     setActiveCategory('All');
     setActiveCollection('All');
+    setSortBy('Featured');
+    setPriceRange('All');
+    setNewOnly(false);
+    setActiveSize('All');
+    setActiveMaterial('All');
   }, []);
 
   const handleAddToCart = useCallback(
@@ -131,19 +207,8 @@ export function ShopContent({ products }: { products: Product[] }) {
                 aria-label={`Remove ${activeCategory} filter`}
               >
                 {activeCategory}
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M3 3l6 6M9 3l-6 6"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                  />
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                 </svg>
               </button>
             )}
@@ -154,19 +219,68 @@ export function ShopContent({ products }: { products: Product[] }) {
                 aria-label={`Remove ${activeCollection} filter`}
               >
                 {activeCollection}
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M3 3l6 6M9 3l-6 6"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                  />
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
+            {priceRange !== 'All' && (
+              <button
+                className={styles.pill}
+                onClick={() => setPriceRange('All')}
+                aria-label={`Remove ${priceRange} filter`}
+              >
+                {priceRange}
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
+            {newOnly && (
+              <button
+                className={styles.pill}
+                onClick={() => setNewOnly(false)}
+                aria-label="Remove New Arrivals filter"
+              >
+                New Arrivals
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
+            {activeSize !== 'All' && (
+              <button
+                className={styles.pill}
+                onClick={() => setActiveSize('All')}
+                aria-label={`Remove size ${activeSize} filter`}
+              >
+                Size: {activeSize}
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
+            {activeMaterial !== 'All' && (
+              <button
+                className={styles.pill}
+                onClick={() => setActiveMaterial('All')}
+                aria-label={`Remove ${activeMaterial} filter`}
+              >
+                {activeMaterial}
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
+            {sortBy !== 'Featured' && (
+              <button
+                className={styles.pill}
+                onClick={() => setSortBy('Featured')}
+                aria-label={`Remove ${sortBy} sort`}
+              >
+                {sortBy}
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                 </svg>
               </button>
             )}
@@ -224,6 +338,23 @@ export function ShopContent({ products }: { products: Product[] }) {
 
         {/* Drawer Body */}
         <div className={styles.modalBody}>
+          {/* Sort By */}
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Sort By</span>
+            <div className={styles.filterOptions}>
+              {sortOptions.map((opt) => (
+                <button
+                  key={opt}
+                  className={`${styles.filterOption} ${sortBy === opt ? styles.filterOptionActive : ''}`}
+                  onClick={() => setSortBy(opt)}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Category */}
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Category</span>
             <div className={styles.filterOptions}>
@@ -239,6 +370,7 @@ export function ShopContent({ products }: { products: Product[] }) {
             </div>
           </div>
 
+          {/* Collection */}
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Collection</span>
             <div className={styles.filterOptions}>
@@ -249,6 +381,84 @@ export function ShopContent({ products }: { products: Product[] }) {
                   onClick={() => setActiveCollection(col)}
                 >
                   {col}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Price Range */}
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Price</span>
+            <div className={styles.filterOptions}>
+              {priceRanges.map((range) => (
+                <button
+                  key={range}
+                  className={`${styles.filterOption} ${priceRange === range ? styles.filterOptionActive : ''}`}
+                  onClick={() => setPriceRange(range)}
+                >
+                  {range}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* New Arrivals */}
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>New Arrivals</span>
+            <div className={styles.filterOptions}>
+              <button
+                className={`${styles.filterToggle} ${newOnly ? styles.filterToggleActive : ''}`}
+                onClick={() => setNewOnly(!newOnly)}
+                role="switch"
+                aria-checked={newOnly}
+              >
+                <span className={styles.filterToggleThumb} />
+              </button>
+              <span className={styles.filterToggleLabel}>
+                {newOnly ? 'Showing new only' : 'Show all'}
+              </span>
+            </div>
+          </div>
+
+          {/* Size */}
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Size</span>
+            <div className={styles.filterOptions}>
+              <button
+                className={`${styles.filterOption} ${activeSize === 'All' ? styles.filterOptionActive : ''}`}
+                onClick={() => setActiveSize('All')}
+              >
+                All
+              </button>
+              {allSizes.map((size) => (
+                <button
+                  key={size}
+                  className={`${styles.filterOption} ${activeSize === size ? styles.filterOptionActive : ''}`}
+                  onClick={() => setActiveSize(size)}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Material */}
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Material</span>
+            <div className={styles.filterOptions}>
+              <button
+                className={`${styles.filterOption} ${activeMaterial === 'All' ? styles.filterOptionActive : ''}`}
+                onClick={() => setActiveMaterial('All')}
+              >
+                All
+              </button>
+              {allMaterials.map((mat) => (
+                <button
+                  key={mat}
+                  className={`${styles.filterOption} ${activeMaterial === mat ? styles.filterOptionActive : ''}`}
+                  onClick={() => setActiveMaterial(mat)}
+                >
+                  {mat}
                 </button>
               ))}
             </div>
