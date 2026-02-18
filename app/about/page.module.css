@@ -11,12 +11,27 @@
    ============================================ */
 
 .hero {
+  position: relative;
   background-color: var(--color-primary);
   color: var(--color-white);
   padding: var(--space-5xl) var(--container-padding);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 600px auto;
+  opacity: 0.015;
+  pointer-events: none;
 }
 
 .heroInner {
+  position: relative;
+  z-index: 1;
   max-width: var(--container-max);
   margin: 0 auto;
   display: flex;
@@ -236,12 +251,27 @@
    ============================================ */
 
 .cta {
+  position: relative;
   background-color: var(--color-primary);
   color: var(--color-white);
   padding: var(--space-5xl) var(--container-padding);
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 600px auto;
+  opacity: 0.015;
+  pointer-events: none;
 }
 
 .ctaInner {
+  position: relative;
+  z-index: 1;
   max-width: var(--container-max);
   margin: 0 auto;
   display: flex;

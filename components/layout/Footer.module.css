@@ -3,26 +3,11 @@
    ============================================ */
 
 .footer {
-  position: relative;
   background-color: var(--color-primary);
   color: var(--color-white);
-  overflow: hidden;
-}
-
-.footer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/brand/pattern-light.svg');
-  background-repeat: repeat;
-  background-size: 600px auto;
-  opacity: 0.015;
-  pointer-events: none;
 }
 
 .inner {
-  position: relative;
-  z-index: 1;
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;

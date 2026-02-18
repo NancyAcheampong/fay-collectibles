@@ -24,6 +24,17 @@
   overflow: hidden;
 }
 
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 600px auto;
+  opacity: 0.015;
+  pointer-events: none;
+}
+
 .heroContent {
   position: relative;
   z-index: 3;
@@ -156,9 +167,21 @@
    ============================================ */
 
 .marquee {
+  position: relative;
   overflow: hidden;
   background-color: var(--color-primary);
   padding: var(--space-md) 0;
+}
+
+.marquee::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 600px auto;
+  opacity: 0.015;
+  pointer-events: none;
 }
 
 .marqueeTrack {
@@ -376,11 +399,26 @@
    ============================================ */
 
 .ethos {
+  position: relative;
   background-color: var(--color-primary);
   color: var(--color-white);
+  overflow: hidden;
+}
+
+.ethos::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/brand/pattern-light.svg');
+  background-repeat: repeat;
+  background-size: 600px auto;
+  opacity: 0.015;
+  pointer-events: none;
 }
 
 .ethosInner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-3xl);
