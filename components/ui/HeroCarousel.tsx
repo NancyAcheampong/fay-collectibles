@@ -14,7 +14,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 1,
     background:
-      "url('/images/hero/hero-1.jpg') center/contain no-repeat",
+      "url('/images/hero/hero-1.jpg') center/100% 100% no-repeat",
     alt: 'Models in bold patterned fashion — The Essentials collection',
   },
   {
