@@ -14,8 +14,8 @@ const heroSlides: HeroSlide[] = [
   {
     id: 1,
     background:
-      'linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #1a1a2e 100%)',
-    alt: 'Model in tailored charcoal overcoat — The Essentials collection',
+      "url('/images/hero/hero-1.jpg') center/cover no-repeat",
+    alt: 'Models in bold patterned fashion — The Essentials collection',
   },
   {
     id: 2,
