@@ -38,7 +38,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 5,
     background:
-      'linear-gradient(155deg, #1e1e1e 0%, #2a2824 30%, #342e24 50%, #1e1e1e 100%)',
+      "url('/images/hero/hero-5.jpg') center/cover no-repeat",
     alt: 'The Edit collection — curated wardrobe essentials',
   },
 ];
