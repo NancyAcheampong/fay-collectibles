@@ -35,6 +35,12 @@ const heroSlides: HeroSlide[] = [
       "url('/images/hero/hero-4.jpg') center/cover no-repeat",
     alt: 'Backstage fitting — precise tailoring detail',
   },
+  {
+    id: 5,
+    background:
+      'linear-gradient(155deg, #1e1e1e 0%, #2a2824 30%, #342e24 50%, #1e1e1e 100%)',
+    alt: 'The Edit collection — curated wardrobe essentials',
+  },
 ];
 
 const SLIDE_DURATION = 6000;
