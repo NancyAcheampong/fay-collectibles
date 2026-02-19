@@ -26,7 +26,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 3,
     background:
-      'linear-gradient(145deg, #1c1c1c 0%, #2d2420 30%, #3d2e1e 55%, #1c1c1c 100%)',
+      "url('/images/hero/hero-3.jpg') center/cover no-repeat",
     alt: 'Editorial shot — structured silhouettes at golden hour',
   },
   {
