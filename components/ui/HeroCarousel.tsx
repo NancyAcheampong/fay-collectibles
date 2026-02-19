@@ -20,7 +20,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 2,
     background:
-      'linear-gradient(160deg, #2c2c2c 0%, #3a3a3a 25%, #1e1e1e 50%, #2a2a2a 75%, #1a1a1a 100%)',
+      "url('/images/hero/hero-2.jpg') center/cover no-repeat",
     alt: 'Close-up of premium Italian fabric texture — New Season',
   },
   {
