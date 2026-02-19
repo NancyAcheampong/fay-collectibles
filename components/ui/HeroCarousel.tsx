@@ -14,13 +14,13 @@ const heroSlides: HeroSlide[] = [
   {
     id: 1,
     background:
-      "url('/images/hero/hero-1.jpg') center/cover no-repeat",
+      "url('/images/hero/hero-1.jpg') center/contain no-repeat",
     alt: 'Models in bold patterned fashion — The Essentials collection',
   },
   {
     id: 2,
     background:
-      "url('/images/hero/hero-2.jpg') center/cover no-repeat",
+      "url('/images/hero/hero-2.jpg') center/contain no-repeat",
     alt: 'Close-up of premium Italian fabric texture — New Season',
   },
   {
