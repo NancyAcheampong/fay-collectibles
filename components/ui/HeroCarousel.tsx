@@ -20,7 +20,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 2,
     background:
-      "url('/images/hero/hero-2.jpg') center/contain no-repeat",
+      "url('/images/hero/hero-2.jpg') center/cover no-repeat",
     alt: 'Close-up of premium Italian fabric texture — New Season',
   },
   {
