@@ -32,7 +32,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 4,
     background:
-      "url('/images/hero/hero-4.jpg') center/cover no-repeat",
+      "url('/images/hero/hero-4.jpg') center/contain no-repeat",
     alt: 'Backstage fitting — precise tailoring detail',
   },
   {
