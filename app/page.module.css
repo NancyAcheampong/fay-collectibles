@@ -64,7 +64,7 @@
 }
 
 .heroTitleLine {
-  font-family: var(--font-display);
+
   font-size: var(--text-4xl);
   font-weight: var(--font-weight-light);
   letter-spacing: var(--tracking-widest);
@@ -74,7 +74,7 @@
 }
 
 .heroTitleAccent {
-  font-family: var(--font-display);
+
   font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-widest);
@@ -246,7 +246,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-display);
+
   font-size: var(--text-3xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-wider);
@@ -445,7 +445,7 @@
 }
 
 .ethosHeadline {
-  font-family: var(--font-display);
+
   font-size: var(--text-3xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
@@ -586,7 +586,7 @@
 }
 
 .collectionName {
-  font-family: var(--font-display);
+
   font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-wider);
@@ -718,7 +718,7 @@
 }
 
 .newsletterTitle {
-  font-family: var(--font-display);
+
   font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-wider);
