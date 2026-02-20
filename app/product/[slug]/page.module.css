@@ -114,6 +114,7 @@
 }
 
 .name {
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
@@ -342,6 +343,7 @@
 }
 
 .recTitle {
+  font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-wider);
