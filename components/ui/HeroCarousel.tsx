@@ -14,7 +14,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 1,
     background:
-      "url('/images/hero/hero-1.jpg') center/100% 100% no-repeat",
+      "url('/images/hero/hero-1.jpg') center/cover no-repeat",
     alt: 'Models in bold patterned fashion — The Essentials collection',
   },
   {
@@ -32,7 +32,7 @@ const heroSlides: HeroSlide[] = [
   {
     id: 4,
     background:
-      "url('/images/hero/hero-4.jpg') center/contain no-repeat",
+      "url('/images/hero/hero-4.jpg') center/cover no-repeat",
     alt: 'Backstage fitting — precise tailoring detail',
   },
   {
