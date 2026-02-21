@@ -6,7 +6,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: var(--z-sticky);
 }
 
@@ -20,7 +23,7 @@
 }
 
 .text {
-  color: var(--color-white);
+  color: rgba(255, 255, 255, 0.6);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;

@@ -12,8 +12,9 @@ export const metadata: Metadata = {
 
 export default function ShopPage() {
   return (
-    <main className={styles.page}>
+    <div className={styles.page}>
       <section className={styles.hero}>
+        <h1 className={styles.title}>Shop</h1>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <ol className={styles.breadcrumbList}>
             <li className={styles.breadcrumbItem}>
@@ -45,12 +46,11 @@ export default function ShopPage() {
             </li>
           </ol>
         </nav>
-        <h1 className={styles.title}>Shop</h1>
       </section>
 
       <section className={styles.content}>
         <ShopContent products={products} />
       </section>
-    </main>
+    </div>
   );
 }

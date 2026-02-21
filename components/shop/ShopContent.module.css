@@ -1,0 +1,609 @@
+/* ============================================
+   ShopContent
+   ============================================ */
+
+.shopContent {
+  width: 100%;
+}
+
+/* ============================================
+   Filter Bar — compact top row
+   ============================================ */
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.filterTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 16px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.filterTrigger:hover {
+  border-color: var(--color-primary);
+}
+
+.filterBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* Active filter pills */
+.activePills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-primary);
+  background-color: var(--color-light);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.pill:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.pill svg {
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+}
+
+.pill:hover svg {
+  opacity: 1;
+}
+
+.clearAll {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color var(--transition-fast);
+}
+
+.clearAll:hover {
+  color: var(--color-primary);
+}
+
+/* Result count — pushed to far right */
+.resultCount {
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ============================================
+   Filter Drawer — Overlay (backdrop)
+   ============================================ */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: background-color var(--transition-base);
+}
+
+.modalOverlayVisible {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+/* ============================================
+   Filter Drawer — Panel (slides from left)
+   ============================================ */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 420px;
+  z-index: var(--z-modal);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  opacity: 0;
+  box-shadow: none;
+  transition:
+    transform var(--transition-luxury),
+    opacity 400ms ease,
+    box-shadow 500ms ease;
+  will-change: transform, opacity;
+}
+
+.modalOpen {
+  transform: translateX(0);
+  opacity: 1;
+  box-shadow: var(--shadow-xl);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modalTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.modalClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-secondary);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.modalClose:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   Filter Modal — Body (grows with content)
+   ============================================ */
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding: var(--space-xl);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.filterLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.filterOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.filterOption {
+  padding: 8px 18px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.filterOption:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.filterOptionActive {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Toggle switch — New Arrivals */
+.filterToggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background-color: var(--color-light);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.filterToggleActive {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.filterToggleThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform var(--transition-fast);
+}
+
+.filterToggleActive .filterToggleThumb {
+  transform: translateX(18px);
+}
+
+.filterToggleLabel {
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ============================================
+   Filter Modal — Footer
+   ============================================ */
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--border-color);
+}
+
+.modalClear {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color var(--transition-fast);
+}
+
+.modalClear:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.modalClear:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.modalApply {
+  padding: 12px 28px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.modalApply:hover {
+  background-color: var(--color-black);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   Product Grid
+   ============================================ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl) var(--space-md);
+}
+
+/* ============================================
+   Product Card
+   ============================================ */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.cardImageWrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.cardImage {
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(145deg, #e8e8e8 0%, #d8d8d8 50%, #e0e0e0 100%);
+  transition: transform var(--transition-luxury);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.03);
+}
+
+.cardBadge {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  padding: 4px 12px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardName {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+}
+
+.cardPrice {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.cardCollection {
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ============================================
+   Quick Add / Size Selector
+   ============================================ */
+
+.quickAdd {
+  width: 100%;
+  height: 40px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.quickAdd:hover {
+  background-color: var(--color-black);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.sizeSelector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sizeButton {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.sizeButton:hover {
+  border-color: var(--color-primary);
+}
+
+.sizeButtonActive {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.addButton {
+  width: 100%;
+  height: 40px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.addButton:hover:not(:disabled) {
+  background-color: var(--color-black);
+  box-shadow: var(--shadow-md);
+}
+
+.addButton:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-4xl) 0;
+  text-align: center;
+}
+
+.emptyText {
+  font-size: var(--text-base);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.emptyReset {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-primary);
+  padding-bottom: 2px;
+  cursor: pointer;
+  color: var(--color-primary);
+  transition: opacity var(--transition-fast);
+}
+
+.emptyReset:hover {
+  opacity: 0.6;
+}
+
+/* ============================================
+   Tablet — 768px
+   ============================================ */
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl) var(--space-xl);
+  }
+}
+
+/* ============================================
+   Desktop — 1200px
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .modalOverlay,
+  .modal {
+    transition: none;
+  }
+
+  .modal {
+    opacity: 1;
+  }
+}

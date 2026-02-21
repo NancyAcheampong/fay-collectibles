@@ -8,14 +8,21 @@
   left: 0;
   right: 0;
   height: var(--header-height);
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-light);
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
   z-index: var(--z-sticky);
-  transition: box-shadow var(--transition-base);
+  transition:
+    box-shadow var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .scrolled {
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+  background-color: rgba(255, 255, 255, 0.97);
+  box-shadow: var(--shadow-md);
+  border-bottom-color: transparent;
 }
 
 .inner {
@@ -52,6 +59,11 @@
   border: none;
   padding: 0;
   margin-left: -8px;
+  transition: opacity var(--transition-fast);
+}
+
+.hamburger:hover {
+  opacity: 0.6;
 }
 
 .hamburger svg {
@@ -71,11 +83,16 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: opacity var(--transition-base);
+}
+
+.logo:hover {
+  opacity: 0.7;
 }
 
 .logoImage {
-  height: 36px;
-  width: auto;
+  height: 40px;
+  width: 40px;
   object-fit: contain;
 }
 
@@ -123,7 +140,7 @@
   height: 16px;
   padding: 0 4px;
   border-radius: var(--radius-full);
-  background-color: var(--color-primary);
+  background-color: var(--color-accent);
   color: var(--color-white);
   font-size: 10px;
   font-weight: var(--font-weight-semibold);
@@ -135,6 +152,12 @@
 /* ============================================
    Nav Links (Desktop)
    ============================================ */
+
+.navItemWithMenu {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
 .navLink {
   font-size: var(--text-xs);
@@ -167,6 +190,96 @@
 }
 
 /* ============================================
+   Mega Menu
+   ============================================ */
+
+.megaMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.megaMenuOpen {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.megaMenuInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr;
+  gap: var(--space-3xl);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--container-padding);
+}
+
+.megaMenuColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.megaMenuTitle {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.megaMenuLink {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+  padding: 4px 0;
+  transition: color var(--transition-fast);
+}
+
+.megaMenuLink:hover {
+  color: var(--color-primary);
+}
+
+/* Feature card in mega menu */
+.megaMenuFeature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.megaMenuFeatureImage {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 50%, #1e1e1e 100%);
+  width: 100%;
+}
+
+.megaMenuFeatureLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.megaMenuFeatureText {
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ============================================
    Mobile Overlay
    ============================================ */
 
@@ -193,6 +306,7 @@
   flex-direction: column;
   height: 100%;
   padding: var(--space-lg) var(--container-padding);
+  overflow-y: auto;
 }
 
 .overlayHeader {
@@ -200,7 +314,7 @@
   justify-content: flex-end;
   align-items: center;
   height: var(--header-height);
-  margin-bottom: var(--space-3xl);
+  margin-bottom: var(--space-2xl);
 }
 
 .closeButton {
@@ -214,6 +328,11 @@
   background: none;
   border: none;
   padding: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.closeButton:hover {
+  opacity: 0.5;
 }
 
 .closeButton svg {
@@ -266,6 +385,48 @@
   opacity: 0.6;
 }
 
+/* Mobile Nav Divider & Categories */
+
+.mobileNavDivider {
+  width: 40px;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: var(--space-md) 0;
+}
+
+.mobileNavCategory {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.mobileNavCategoryLink {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-secondary);
+  line-height: var(--leading-snug);
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    color var(--transition-fast);
+}
+
+.overlayOpen .mobileNavCategoryLink {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideUp 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mobileNavCategoryLink:hover {
+  color: var(--color-primary);
+}
+
 /* ============================================
    Overlay Footer
    ============================================ */
@@ -305,10 +466,16 @@
     display: flex;
     align-items: center;
     gap: var(--space-xl);
+    height: 100%;
+  }
+
+  .megaMenu {
+    display: block;
   }
 
   .logoImage {
-    height: 42px;
+    height: 44px;
+    width: 44px;
   }
 
   .right {
@@ -336,6 +503,7 @@
 
   .logoImage {
     height: 48px;
+    width: 48px;
   }
 
   .right {
