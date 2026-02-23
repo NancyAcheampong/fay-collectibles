@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-context';
+import { useAuth } from '@/lib/auth-context';
 import { SearchModal } from '@/components/search/SearchModal';
 import styles from './Header.module.css';
 
@@ -52,9 +53,12 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { itemCount, openCart } = useCart();
+  const { user, isAuthenticated, signOut } = useAuth();
   const megaMenuTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,6 +99,18 @@ export function Header() {
     setMobileMenuOpen(false);
     document.body.style.overflow = '';
   }, []);
+
+  // Close profile popup on outside click
+  useEffect(() => {
+    if (!profileOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [profileOpen]);
 
   return (
     <header
@@ -197,6 +213,100 @@ export function Header() {
               />
             </svg>
           </Link>
+
+          {/* Profile */}
+          <div className={styles.profileWrapper} ref={profileRef}>
+            <button
+              className={styles.iconButton}
+              onClick={() => setProfileOpen((prev) => !prev)}
+              aria-label="Account"
+              aria-expanded={profileOpen}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <circle cx="10" cy="7" r="3.5" stroke="currentColor" strokeWidth="1.5" />
+                <path
+                  d="M3 17.5c0-3.5 3.1-6 7-6s7 2.5 7 6"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+
+            {/* Profile Popup */}
+            <div
+              className={`${styles.profilePopup} ${profileOpen ? styles.profilePopupOpen : ''}`}
+              aria-hidden={!profileOpen}
+            >
+              {isAuthenticated ? (
+                <>
+                  <div className={styles.profilePopupInner}>
+                    <p className={styles.profilePopupTitle}>
+                      Hi, {user?.firstName}
+                    </p>
+                    <p className={styles.profilePopupText}>
+                      Welcome back to FAY.
+                    </p>
+                  </div>
+                  <div className={styles.profilePopupLinks}>
+                    <a href="#" className={styles.profilePopupLink}>My Orders</a>
+                    <a href="#" className={styles.profilePopupLink}>My Details</a>
+                    <a href="#" className={styles.profilePopupLink}>Address Book</a>
+                    <a href="#" className={styles.profilePopupLink}>Wishlist</a>
+                  </div>
+                  <div className={styles.profilePopupFooter}>
+                    <button
+                      className={styles.signOutBtn}
+                      onClick={() => {
+                        signOut();
+                        setProfileOpen(false);
+                      }}
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className={styles.profilePopupInner}>
+                    <p className={styles.profilePopupTitle}>Welcome to FAY</p>
+                    <p className={styles.profilePopupText}>
+                      Sign in for a personalised shopping experience.
+                    </p>
+                    <Link
+                      href="/signin"
+                      className={styles.profilePopupBtn}
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                    <div className={styles.profilePopupDivider}>
+                      <span>or</span>
+                    </div>
+                    <Link
+                      href="/register"
+                      className={styles.profilePopupBtnOutline}
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      Create Account
+                    </Link>
+                  </div>
+                  <div className={styles.profilePopupLinks}>
+                    <a href="#" className={styles.profilePopupLink}>My Orders</a>
+                    <a href="#" className={styles.profilePopupLink}>My Details</a>
+                    <a href="#" className={styles.profilePopupLink}>Address Book</a>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
 
           {/* Cart */}
           <button
@@ -344,27 +454,60 @@ export function Header() {
           </nav>
 
           <div className={styles.overlayFooter}>
-            <Link
-              href="/account"
-              className={styles.overlayFooterLink}
-              onClick={closeMobileMenu}
-            >
-              Account
-            </Link>
-            <Link
-              href="/account/wishlist"
-              className={styles.overlayFooterLink}
-              onClick={closeMobileMenu}
-            >
-              Wishlist
-            </Link>
-            <Link
-              href="/help"
-              className={styles.overlayFooterLink}
-              onClick={closeMobileMenu}
-            >
-              Help
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <span className={styles.overlayFooterGreeting}>
+                  Hi, {user?.firstName}
+                </span>
+                <Link
+                  href="#"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  My Orders
+                </Link>
+                <Link
+                  href="#"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Wishlist
+                </Link>
+                <button
+                  className={styles.overlayFooterLink}
+                  onClick={() => {
+                    signOut();
+                    closeMobileMenu();
+                  }}
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/signin"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Create Account
+                </Link>
+                <Link
+                  href="#"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Help
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
