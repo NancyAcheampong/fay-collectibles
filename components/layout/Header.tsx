@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-context';
+import { useAuth } from '@/lib/auth-context';
 import { SearchModal } from '@/components/search/SearchModal';
 import styles from './Header.module.css';
 
@@ -55,6 +56,7 @@ export function Header() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { itemCount, openCart } = useCart();
+  const { user, isAuthenticated, signOut } = useAuth();
   const megaMenuTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const profileRef = useRef<HTMLDivElement>(null);
 
@@ -243,32 +245,66 @@ export function Header() {
               className={`${styles.profilePopup} ${profileOpen ? styles.profilePopupOpen : ''}`}
               aria-hidden={!profileOpen}
             >
-              <div className={styles.profilePopupInner}>
-                <p className={styles.profilePopupTitle}>Welcome to FAY</p>
-                <p className={styles.profilePopupText}>
-                  Sign in for a personalised shopping experience.
-                </p>
-                <button
-                  className={styles.profilePopupBtn}
-                  onClick={() => setProfileOpen(false)}
-                >
-                  Sign In
-                </button>
-                <div className={styles.profilePopupDivider}>
-                  <span>or</span>
-                </div>
-                <button
-                  className={styles.profilePopupBtnOutline}
-                  onClick={() => setProfileOpen(false)}
-                >
-                  Create Account
-                </button>
-              </div>
-              <div className={styles.profilePopupLinks}>
-                <a href="#" className={styles.profilePopupLink}>My Orders</a>
-                <a href="#" className={styles.profilePopupLink}>My Details</a>
-                <a href="#" className={styles.profilePopupLink}>Address Book</a>
-              </div>
+              {isAuthenticated ? (
+                <>
+                  <div className={styles.profilePopupInner}>
+                    <p className={styles.profilePopupTitle}>
+                      Hi, {user?.firstName}
+                    </p>
+                    <p className={styles.profilePopupText}>
+                      Welcome back to FAY.
+                    </p>
+                  </div>
+                  <div className={styles.profilePopupLinks}>
+                    <a href="#" className={styles.profilePopupLink}>My Orders</a>
+                    <a href="#" className={styles.profilePopupLink}>My Details</a>
+                    <a href="#" className={styles.profilePopupLink}>Address Book</a>
+                    <a href="#" className={styles.profilePopupLink}>Wishlist</a>
+                  </div>
+                  <div className={styles.profilePopupFooter}>
+                    <button
+                      className={styles.signOutBtn}
+                      onClick={() => {
+                        signOut();
+                        setProfileOpen(false);
+                      }}
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className={styles.profilePopupInner}>
+                    <p className={styles.profilePopupTitle}>Welcome to FAY</p>
+                    <p className={styles.profilePopupText}>
+                      Sign in for a personalised shopping experience.
+                    </p>
+                    <Link
+                      href="/signin"
+                      className={styles.profilePopupBtn}
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                    <div className={styles.profilePopupDivider}>
+                      <span>or</span>
+                    </div>
+                    <Link
+                      href="/register"
+                      className={styles.profilePopupBtnOutline}
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      Create Account
+                    </Link>
+                  </div>
+                  <div className={styles.profilePopupLinks}>
+                    <a href="#" className={styles.profilePopupLink}>My Orders</a>
+                    <a href="#" className={styles.profilePopupLink}>My Details</a>
+                    <a href="#" className={styles.profilePopupLink}>Address Book</a>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -418,27 +454,60 @@ export function Header() {
           </nav>
 
           <div className={styles.overlayFooter}>
-            <Link
-              href="/account"
-              className={styles.overlayFooterLink}
-              onClick={closeMobileMenu}
-            >
-              Account
-            </Link>
-            <Link
-              href="/account/wishlist"
-              className={styles.overlayFooterLink}
-              onClick={closeMobileMenu}
-            >
-              Wishlist
-            </Link>
-            <Link
-              href="/help"
-              className={styles.overlayFooterLink}
-              onClick={closeMobileMenu}
-            >
-              Help
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <span className={styles.overlayFooterGreeting}>
+                  Hi, {user?.firstName}
+                </span>
+                <Link
+                  href="#"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  My Orders
+                </Link>
+                <Link
+                  href="#"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Wishlist
+                </Link>
+                <button
+                  className={styles.overlayFooterLink}
+                  onClick={() => {
+                    signOut();
+                    closeMobileMenu();
+                  }}
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/signin"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Create Account
+                </Link>
+                <Link
+                  href="#"
+                  className={styles.overlayFooterLink}
+                  onClick={closeMobileMenu}
+                >
+                  Help
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

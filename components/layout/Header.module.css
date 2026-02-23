@@ -291,6 +291,27 @@
   color: var(--color-primary);
 }
 
+.profilePopupFooter {
+  padding: var(--space-md) var(--space-xl);
+  border-top: 1px solid var(--color-light);
+}
+
+.signOutBtn {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) 0;
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.signOutBtn:hover {
+  color: var(--color-primary);
+}
+
 /* ============================================
    Nav Links (Desktop)
    ============================================ */
@@ -582,12 +603,21 @@
   margin-top: auto;
 }
 
+.overlayFooterGreeting {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
 .overlayFooterLink {
   font-size: var(--text-sm);
   font-weight: var(--font-weight-regular);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-secondary);
+  text-align: left;
   transition: color var(--transition-fast);
 }
 
