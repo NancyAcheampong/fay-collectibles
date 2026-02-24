@@ -241,7 +241,7 @@ export function CartDrawer() {
                 ${total.toLocaleString()}
               </span>
             </div>
-            <Link href="/checkout" className={styles.checkoutButton} onClick={closeCart}>Checkout</Link>
+            <button className={styles.checkoutButton}>Checkout</button>
             <Link href="/shop" className={styles.continueLink} onClick={closeCart}>
               Continue Shopping
             </Link>
