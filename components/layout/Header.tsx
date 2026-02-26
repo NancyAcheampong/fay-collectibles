@@ -404,7 +404,20 @@ export function Header() {
         aria-hidden={!mobileMenuOpen}
       >
         <div className={styles.overlayInner}>
+          {/* Overlay Header — Logo + Close */}
           <div className={styles.overlayHeader}>
+            <Link
+              href="/"
+              className={styles.overlayLogo}
+              onClick={closeMobileMenu}
+              aria-label="FAY Collectibles home"
+            >
+              <img
+                src="/brand/logo-black.svg"
+                alt="FAY"
+                className={styles.overlayLogoImage}
+              />
+            </Link>
             <button
               className={styles.closeButton}
               onClick={closeMobileMenu}
@@ -424,6 +437,7 @@ export function Header() {
             </button>
           </div>
 
+          {/* Main Nav Links */}
           <nav className={styles.mobileNav} aria-label="Mobile navigation">
             {mobileNavLinks.map((link, index) => (
               <Link
@@ -436,78 +450,68 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-
-            <div className={styles.mobileNavDivider} />
-
-            <span className={styles.mobileNavCategory}>Shop by Category</span>
-            {mobileCategoryLinks.map((link, index) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={styles.mobileNavCategoryLink}
-                onClick={closeMobileMenu}
-                style={{ animationDelay: `${(mobileNavLinks.length + index + 2) * 80}ms` }}
-              >
-                {link.label}
-              </Link>
-            ))}
           </nav>
 
+          {/* Categories as pills */}
+          <div className={styles.overlayCategorySection}>
+            <span className={styles.mobileNavCategory}>Shop by Category</span>
+            <div className={styles.categoryPills}>
+              {mobileCategoryLinks.map((link, index) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={styles.categoryPill}
+                  onClick={closeMobileMenu}
+                  style={{ animationDelay: `${(mobileNavLinks.length + index + 2) * 80}ms` }}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Footer */}
           <div className={styles.overlayFooter}>
-            {isAuthenticated ? (
-              <>
-                <span className={styles.overlayFooterGreeting}>
-                  Hi, {user?.firstName}
+            {isAuthenticated && (
+              <div className={styles.overlayAccount}>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                <span className={styles.overlayAccountName}>
+                  {user?.firstName} {user?.lastName}
                 </span>
-                <Link
-                  href="#"
-                  className={styles.overlayFooterLink}
-                  onClick={closeMobileMenu}
-                >
-                  My Orders
-                </Link>
-                <Link
-                  href="#"
-                  className={styles.overlayFooterLink}
-                  onClick={closeMobileMenu}
-                >
-                  Wishlist
-                </Link>
-                <button
-                  className={styles.overlayFooterLink}
-                  onClick={() => {
-                    signOut();
-                    closeMobileMenu();
-                  }}
-                >
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/signin"
-                  className={styles.overlayFooterLink}
-                  onClick={closeMobileMenu}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/register"
-                  className={styles.overlayFooterLink}
-                  onClick={closeMobileMenu}
-                >
-                  Create Account
-                </Link>
-                <Link
-                  href="#"
-                  className={styles.overlayFooterLink}
-                  onClick={closeMobileMenu}
-                >
-                  Help
-                </Link>
-              </>
+              </div>
             )}
+            <div className={styles.overlayFooterLinks}>
+              <Link
+                href="#"
+                className={styles.overlayFooterLink}
+                onClick={closeMobileMenu}
+              >
+                Customer Service
+              </Link>
+              <Link
+                href="#"
+                className={styles.overlayFooterLink}
+                onClick={closeMobileMenu}
+              >
+                Shipping & Returns
+              </Link>
+              <Link
+                href="/about"
+                className={styles.overlayFooterLink}
+                onClick={closeMobileMenu}
+              >
+                About FAY
+              </Link>
+            </div>
           </div>
         </div>
       </div>
