@@ -1,5 +1,6 @@
 /* ============================================
    Bottom Navigation — Mobile Only
+   Modern floating glassmorphism design
    ============================================ */
 
 .bottomNav {
@@ -7,73 +8,141 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--bottom-nav-height);
-  background-color: var(--color-white);
-  border-top: 1px solid var(--color-light);
   z-index: var(--z-sticky);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding: 0 12px 12px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
 }
 
 .inner {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 100%;
-  max-width: var(--container-max);
+  height: var(--bottom-nav-height);
+  max-width: 400px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  pointer-events: auto;
 }
+
+/* ============================================
+   Tab Base
+   ============================================ */
 
 .tab {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 4px;
   flex: 1;
   height: 100%;
   color: var(--color-secondary);
   cursor: pointer;
   background: none;
   border: none;
-  padding: 0;
+  padding: 6px 0;
   text-decoration: none;
-  transition: color var(--transition-fast);
   position: relative;
   -webkit-tap-highlight-color: transparent;
+  transition: color var(--transition-base);
 }
 
-.tab svg {
+.tab:active {
+  transform: scale(0.92);
+}
+
+/* ============================================
+   Tab Icon
+   ============================================ */
+
+.tabIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: transform var(--transition-base);
+}
+
+.tab:active .tabIcon {
+  transform: scale(0.9);
+}
+
+.tabIcon svg {
   display: block;
   width: 22px;
   height: 22px;
 }
 
+/* ============================================
+   Tab Label
+   ============================================ */
+
 .tabLabel {
   font-size: 10px;
   font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-wide);
+  letter-spacing: 0.03em;
   line-height: 1;
+  transition:
+    color var(--transition-base),
+    font-weight var(--transition-base);
 }
+
+/* ============================================
+   Active State
+   ============================================ */
 
 .tabActive {
   color: var(--color-primary);
 }
 
-.tabBadge {
+.tabActive .tabLabel {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Active dot indicator */
+.tabActive::after {
+  content: '';
   position: absolute;
-  top: 6px;
-  left: calc(50% + 4px);
-  min-width: 14px;
-  height: 14px;
-  padding: 0 3px;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
   border-radius: var(--radius-full);
   background-color: var(--color-accent);
+}
+
+/* ============================================
+   Badge
+   ============================================ */
+
+.tabBadge {
+  position: absolute;
+  top: 0;
+  right: -6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
   color: var(--color-white);
   font-size: 9px;
-  font-weight: var(--font-weight-semibold);
-  line-height: 14px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
   text-align: center;
   pointer-events: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* ============================================
