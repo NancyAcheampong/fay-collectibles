@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
@@ -92,7 +93,9 @@ function AccountIcon({ filled }: { filled: boolean }) {
 export function BottomNav() {
   const pathname = usePathname();
   const { itemCount, openCart } = useCart();
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated, signOut } = useAuth();
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const sheetRef = useRef<HTMLDivElement>(null);
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -101,63 +104,142 @@ export function BottomNav() {
 
   const homeActive = isActive('/');
   const shopActive = isActive('/shop');
-  const accountActive =
-    isActive('/signin') || isActive('/register') || isActive('/account');
+
+  const openSheet = useCallback(() => setSheetOpen(true), []);
+  const closeSheet = useCallback(() => setSheetOpen(false), []);
+
+  // Close on outside tap (backdrop)
+  useEffect(() => {
+    if (!sheetOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (sheetRef.current && !sheetRef.current.contains(e.target as Node)) {
+        setSheetOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [sheetOpen]);
 
   return (
-    <nav className={styles.bottomNav} aria-label="Mobile navigation">
-      <div className={styles.inner}>
-        {/* Home */}
-        <Link
-          href="/"
-          className={`${styles.tab} ${homeActive ? styles.tabActive : ''}`}
-          aria-label="Home"
-        >
-          <span className={styles.tabIcon}>
-            <HomeIcon filled={homeActive} />
-          </span>
-          <span className={styles.tabLabel}>Home</span>
-        </Link>
+    <>
+      {/* Account Sheet */}
+      <div
+        className={`${styles.sheetBackdrop} ${sheetOpen ? styles.sheetBackdropOpen : ''}`}
+        aria-hidden={!sheetOpen}
+      />
+      <div
+        ref={sheetRef}
+        className={`${styles.sheet} ${sheetOpen ? styles.sheetOpen : ''}`}
+        aria-hidden={!sheetOpen}
+        role="dialog"
+        aria-label="Account menu"
+      >
+        <div className={styles.sheetHandle} />
 
-        {/* Shop */}
-        <Link
-          href="/shop"
-          className={`${styles.tab} ${shopActive ? styles.tabActive : ''}`}
-          aria-label="Shop"
-        >
-          <span className={styles.tabIcon}>
-            <ShopIcon filled={shopActive} />
-          </span>
-          <span className={styles.tabLabel}>Shop</span>
-        </Link>
-
-        {/* Bag */}
-        <button
-          className={styles.tab}
-          onClick={openCart}
-          aria-label={`Shopping bag, ${itemCount} items`}
-        >
-          <span className={styles.tabIcon}>
-            <BagIcon />
-            {itemCount > 0 && (
-              <span className={styles.tabBadge}>{itemCount}</span>
-            )}
-          </span>
-          <span className={styles.tabLabel}>Bag</span>
-        </button>
-
-        {/* Account */}
-        <Link
-          href={isAuthenticated ? '/account' : '/signin'}
-          className={`${styles.tab} ${accountActive ? styles.tabActive : ''}`}
-          aria-label="Account"
-        >
-          <span className={styles.tabIcon}>
-            <AccountIcon filled={accountActive} />
-          </span>
-          <span className={styles.tabLabel}>Account</span>
-        </Link>
+        {isAuthenticated ? (
+          <>
+            <div className={styles.sheetHeader}>
+              <p className={styles.sheetTitle}>Hi, {user?.firstName}</p>
+              <p className={styles.sheetText}>Welcome back to FAY.</p>
+            </div>
+            <div className={styles.sheetLinks}>
+              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Orders</Link>
+              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Details</Link>
+              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>Address Book</Link>
+              <Link href="/account/wishlist" className={styles.sheetLink} onClick={closeSheet}>Wishlist</Link>
+            </div>
+            <div className={styles.sheetFooter}>
+              <button
+                className={styles.sheetSignOut}
+                onClick={() => {
+                  signOut();
+                  closeSheet();
+                }}
+              >
+                Sign Out
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.sheetHeader}>
+              <p className={styles.sheetTitle}>Welcome to FAY</p>
+              <p className={styles.sheetText}>
+                Sign in for a personalised shopping experience.
+              </p>
+              <Link href="/signin" className={styles.sheetBtn} onClick={closeSheet}>
+                Sign In
+              </Link>
+              <div className={styles.sheetDivider}><span>or</span></div>
+              <Link href="/register" className={styles.sheetBtnOutline} onClick={closeSheet}>
+                Create Account
+              </Link>
+            </div>
+            <div className={styles.sheetLinks}>
+              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Orders</Link>
+              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Details</Link>
+              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>Address Book</Link>
+            </div>
+          </>
+        )}
       </div>
-    </nav>
+
+      {/* Bottom Nav Bar */}
+      <nav className={styles.bottomNav} aria-label="Mobile navigation">
+        <div className={styles.inner}>
+          {/* Home */}
+          <Link
+            href="/"
+            className={`${styles.tab} ${homeActive ? styles.tabActive : ''}`}
+            aria-label="Home"
+          >
+            <span className={styles.tabIcon}>
+              <HomeIcon filled={homeActive} />
+            </span>
+            <span className={styles.tabLabel}>Home</span>
+          </Link>
+
+          {/* Shop */}
+          <Link
+            href="/shop"
+            className={`${styles.tab} ${shopActive ? styles.tabActive : ''}`}
+            aria-label="Shop"
+          >
+            <span className={styles.tabIcon}>
+              <ShopIcon filled={shopActive} />
+            </span>
+            <span className={styles.tabLabel}>Shop</span>
+          </Link>
+
+          {/* Bag */}
+          <button
+            className={styles.tab}
+            onClick={openCart}
+            aria-label={`Shopping bag, ${itemCount} items`}
+          >
+            <span className={styles.tabIcon}>
+              <BagIcon />
+              {itemCount > 0 && (
+                <span className={styles.tabBadge}>{itemCount}</span>
+              )}
+            </span>
+            <span className={styles.tabLabel}>Bag</span>
+          </button>
+
+          {/* Account */}
+          <button
+            className={`${styles.tab} ${sheetOpen ? styles.tabActive : ''}`}
+            onClick={openSheet}
+            aria-label="Account"
+            aria-expanded={sheetOpen}
+          >
+            <span className={styles.tabIcon}>
+              <AccountIcon filled={sheetOpen} />
+            </span>
+            <span className={styles.tabLabel}>Account</span>
+          </button>
+        </div>
+      </nav>
+    </>
   );
 }
