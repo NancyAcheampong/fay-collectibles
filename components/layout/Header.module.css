@@ -635,23 +635,6 @@
   flex-shrink: 0;
 }
 
-.overlayAccount {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  color: var(--color-primary);
-}
-
-.overlayAccount svg {
-  flex-shrink: 0;
-}
-
-.overlayAccountName {
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-wide);
-}
-
 .overlayFooterLinks {
   display: flex;
   flex-direction: column;

@@ -159,11 +159,206 @@
 }
 
 /* ============================================
+   Account Sheet — Backdrop
+   ============================================ */
+
+.sheetBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: calc(var(--z-sticky) - 1);
+  pointer-events: none;
+  transition: background-color var(--transition-base);
+}
+
+.sheetBackdropOpen {
+  background-color: rgba(0, 0, 0, 0.25);
+  pointer-events: auto;
+}
+
+/* ============================================
+   Account Sheet — Panel
+   ============================================ */
+
+.sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--color-white);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(100%);
+  transition: transform var(--transition-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 var(--container-padding);
+  padding-bottom: calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
+  max-height: 80vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sheetOpen {
+  transform: translateY(0);
+}
+
+.sheetHandle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--color-light);
+  margin: 12px auto 4px;
+}
+
+/* ============================================
+   Account Sheet — Header
+   ============================================ */
+
+.sheetHeader {
+  padding: var(--space-lg) 0;
+}
+
+.sheetTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-xs);
+}
+
+.sheetText {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-lg);
+}
+
+.sheetBtn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: background-color var(--transition-fast);
+}
+
+.sheetBtn:active {
+  background-color: var(--color-charcoal);
+}
+
+.sheetDivider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+.sheetDivider::before,
+.sheetDivider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-light);
+}
+
+.sheetDivider span {
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.sheetBtnOutline {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-primary);
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.sheetBtnOutline:active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ============================================
+   Account Sheet — Links
+   ============================================ */
+
+.sheetLinks {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-light);
+}
+
+.sheetLink {
+  display: block;
+  padding: var(--space-sm) 0;
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+  transition: color var(--transition-fast);
+}
+
+.sheetLink:active {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   Account Sheet — Footer (Sign Out)
+   ============================================ */
+
+.sheetFooter {
+  padding: var(--space-md) 0 0;
+  border-top: 1px solid var(--color-light);
+}
+
+.sheetSignOut {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) 0;
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wide);
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-primary);
+  transition: color var(--transition-fast);
+}
+
+.sheetSignOut:active {
+  color: var(--color-primary);
+}
+
+/* ============================================
    Hide on Tablet+ (768px)
    ============================================ */
 
 @media (min-width: 768px) {
-  .bottomNav {
+  .bottomNav,
+  .sheet,
+  .sheetBackdrop {
     display: none;
   }
 }
