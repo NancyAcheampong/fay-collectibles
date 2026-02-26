@@ -4,6 +4,7 @@ import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/ui/CartDrawer";
+import { BottomNav } from "@/components/layout/BottomNav";
 import { CartProvider } from "@/lib/cart-context";
 import { AuthProvider } from "@/lib/auth-context";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             <main>{children}</main>
             <Footer />
             <CartDrawer />
+            <BottomNav />
           </CartProvider>
         </AuthProvider>
       </body>

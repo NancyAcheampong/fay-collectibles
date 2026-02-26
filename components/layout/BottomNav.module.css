@@ -1,0 +1,169 @@
+/* ============================================
+   Bottom Navigation — Mobile Only
+   Modern floating glassmorphism design
+   ============================================ */
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  padding: 0 12px 12px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+  transition:
+    transform var(--transition-slow) cubic-bezier(0.16, 1, 0.3, 1),
+    opacity var(--transition-base);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: var(--bottom-nav-height);
+  max-width: 400px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  pointer-events: auto;
+}
+
+/* ============================================
+   Tab Base
+   ============================================ */
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+  color: var(--color-secondary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  text-decoration: none;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--transition-base);
+}
+
+.tab:active {
+  transform: scale(0.92);
+}
+
+/* ============================================
+   Tab Icon
+   ============================================ */
+
+.tabIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: transform var(--transition-base);
+}
+
+.tab:active .tabIcon {
+  transform: scale(0.9);
+}
+
+.tabIcon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+/* ============================================
+   Tab Label
+   ============================================ */
+
+.tabLabel {
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  transition:
+    color var(--transition-base),
+    font-weight var(--transition-base);
+}
+
+/* ============================================
+   Active State
+   ============================================ */
+
+.tabActive {
+  color: var(--color-primary);
+}
+
+.tabActive .tabLabel {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Active dot indicator */
+.tabActive::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+}
+
+/* ============================================
+   Badge
+   ============================================ */
+
+.tabBadge {
+  position: absolute;
+  top: 0;
+  right: -6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  text-align: center;
+  pointer-events: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   Hide when mobile menu overlay is open
+   ============================================ */
+
+:global(body.mobile-menu-open) .bottomNav {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   Hide on Tablet+ (768px)
+   ============================================ */
+
+@media (min-width: 768px) {
+  .bottomNav {
+    display: none;
+  }
+}

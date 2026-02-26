@@ -84,6 +84,7 @@
   --container-padding: 1.5rem;
   --header-height: 48px;
   --announcement-height: 36px;
+  --bottom-nav-height: 56px;
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -149,6 +150,7 @@ body {
 
 main {
   padding-top: calc(var(--announcement-height) + var(--header-height));
+  padding-bottom: var(--bottom-nav-height);
 }
 
 img,
@@ -245,6 +247,7 @@ button {
   :root {
     --container-padding: 3rem;
     --header-height: 56px;
+    --bottom-nav-height: 0px;
   }
 }
 
