@@ -1,0 +1,367 @@
+/* ============================================
+   Account Pages — Shared Styles
+   ============================================ */
+
+.page {
+  min-height: calc(100vh - var(--announcement-height) - var(--header-height));
+  padding: var(--space-3xl) var(--container-padding) var(--space-4xl);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   Page Header
+   ============================================ */
+
+.header {
+  margin-bottom: var(--space-2xl);
+}
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* ============================================
+   Sidebar Navigation
+   ============================================ */
+
+.nav {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--color-light);
+  padding-bottom: 0;
+}
+
+.navLink {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-secondary);
+  text-decoration: none;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid transparent;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+.navLinkActive {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+  padding: var(--space-4xl) 0;
+}
+
+.emptyIcon {
+  width: 56px;
+  height: 56px;
+  color: var(--color-secondary);
+}
+
+.emptyTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.emptyText {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 320px;
+}
+
+.emptyBtn {
+  display: inline-flex;
+  padding: 12px 32px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.emptyBtn:hover {
+  background-color: var(--color-charcoal);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   Form Styles (Details & Address Book)
+   ============================================ */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 480px) {
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-secondary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.input {
+  padding: 14px 16px;
+  font-size: var(--text-sm);
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-light);
+  outline: none;
+  letter-spacing: var(--tracking-wide);
+  transition: border-color var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--color-warm-gray);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+}
+
+.submitRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  padding-top: var(--space-sm);
+}
+
+.submitBtn {
+  padding: 12px 32px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-primary);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: var(--color-charcoal);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  padding: 12px 24px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-primary);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  background: none;
+  border: 1px solid var(--color-light);
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.cancelBtn:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ============================================
+   Section Dividers
+   ============================================ */
+
+.section {
+  padding-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--color-light);
+  margin-bottom: var(--space-2xl);
+}
+
+.section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+}
+
+/* ============================================
+   Address Card (Address Book)
+   ============================================ */
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 540px) {
+  .cardGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  border: 1px solid var(--color-light);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: relative;
+  transition: border-color var(--transition-fast);
+}
+
+.card:hover {
+  border-color: var(--color-secondary);
+}
+
+.cardDefault {
+  border-color: var(--color-primary);
+}
+
+.cardBadge {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent-dark);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.cardName {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+.cardText {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.cardActions {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.cardAction {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  letter-spacing: var(--tracking-wide);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-primary);
+  transition: opacity var(--transition-fast);
+}
+
+.cardAction:hover {
+  opacity: 0.6;
+}
+
+/* ============================================
+   Success Toast
+   ============================================ */
+
+.toast {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height) + var(--space-lg));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  z-index: var(--z-toast);
+  opacity: 0;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+  pointer-events: none;
+}
+
+.toastVisible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (min-width: 768px) {
+  .toast {
+    bottom: var(--space-2xl);
+  }
+}
