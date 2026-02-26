@@ -143,9 +143,9 @@ export function BottomNav() {
               <p className={styles.sheetText}>Welcome back to FAY.</p>
             </div>
             <div className={styles.sheetLinks}>
-              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Orders</Link>
-              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Details</Link>
-              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>Address Book</Link>
+              <Link href="/account/orders" className={styles.sheetLink} onClick={closeSheet}>My Orders</Link>
+              <Link href="/account/details" className={styles.sheetLink} onClick={closeSheet}>My Details</Link>
+              <Link href="/account/address-book" className={styles.sheetLink} onClick={closeSheet}>Address Book</Link>
               <Link href="/account/wishlist" className={styles.sheetLink} onClick={closeSheet}>Wishlist</Link>
             </div>
             <div className={styles.sheetFooter}>
@@ -176,9 +176,9 @@ export function BottomNav() {
               </Link>
             </div>
             <div className={styles.sheetLinks}>
-              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Orders</Link>
-              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>My Details</Link>
-              <Link href="#" className={styles.sheetLink} onClick={closeSheet}>Address Book</Link>
+              <Link href="/account/orders" className={styles.sheetLink} onClick={closeSheet}>My Orders</Link>
+              <Link href="/account/details" className={styles.sheetLink} onClick={closeSheet}>My Details</Link>
+              <Link href="/account/address-book" className={styles.sheetLink} onClick={closeSheet}>Address Book</Link>
             </div>
           </>
         )}
