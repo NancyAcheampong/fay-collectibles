@@ -88,8 +88,10 @@ export function Header() {
       const next = !prev;
       if (next) {
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('mobile-menu-open');
       } else {
         document.body.style.overflow = '';
+        document.body.classList.remove('mobile-menu-open');
       }
       return next;
     });
@@ -98,6 +100,7 @@ export function Header() {
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
     document.body.style.overflow = '';
+    document.body.classList.remove('mobile-menu-open');
   }, []);
 
   // Close profile popup on outside click
@@ -113,6 +116,7 @@ export function Header() {
   }, [profileOpen]);
 
   return (
+    <>
     <header
       className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}
     >
@@ -397,6 +401,7 @@ export function Header() {
           </div>
         </div>
       </div>
+    </header>
 
       {/* Mobile Navigation Overlay */}
       <div
@@ -518,6 +523,6 @@ export function Header() {
 
       {/* Search Modal */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-    </header>
+    </>
   );
 }
