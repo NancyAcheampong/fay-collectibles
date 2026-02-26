@@ -1,0 +1,87 @@
+/* ============================================
+   Bottom Navigation — Mobile Only
+   ============================================ */
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--bottom-nav-height);
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-light);
+  z-index: var(--z-sticky);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+  height: 100%;
+  color: var(--color-secondary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.tabLabel {
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
+}
+
+.tabActive {
+  color: var(--color-primary);
+}
+
+.tabBadge {
+  position: absolute;
+  top: 6px;
+  left: calc(50% + 4px);
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-size: 9px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 14px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ============================================
+   Hide on Tablet+ (768px)
+   ============================================ */
+
+@media (min-width: 768px) {
+  .bottomNav {
+    display: none;
+  }
+}
