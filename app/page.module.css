@@ -102,7 +102,6 @@
   background-color: rgba(255, 255, 255, 0.95);
   color: var(--color-black);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   transition:
     background-color var(--transition-base),
     transform var(--transition-base),
@@ -352,7 +351,6 @@
   padding: 10px 24px;
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   opacity: 0;
   transform: translateY(8px);
   transition:
