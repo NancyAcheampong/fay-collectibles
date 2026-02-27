@@ -9,7 +9,6 @@
   z-index: var(--z-modal);
   background-color: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   animation: fadeIn 200ms ease forwards;
 }
 

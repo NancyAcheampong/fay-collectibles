@@ -16,7 +16,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   pointer-events: auto;
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 /* Drawer */
