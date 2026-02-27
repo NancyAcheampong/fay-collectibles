@@ -18,9 +18,9 @@ const companyLinks = [
 
 const helpLinks = [
   { label: 'Contact', href: '/help' },
-  { label: 'Shipping & Returns', href: '/help' },
-  { label: 'Size Guide', href: '/help' },
-  { label: 'FAQs', href: '/help' },
+  { label: 'Shipping & Returns', href: '/refund-policy' },
+  { label: 'FAQs', href: '/faqs' },
+  { label: 'Refund Policy', href: '/refund-policy' },
 ];
 
 export function Footer() {
@@ -84,10 +84,10 @@ export function Footer() {
             &copy; {new Date().getFullYear()} FAY Collectibles
           </p>
           <div className={styles.legal}>
-            <Link href="/help" className={styles.legalLink}>
+            <Link href="/privacy" className={styles.legalLink}>
               Privacy Policy
             </Link>
-            <Link href="/help" className={styles.legalLink}>
+            <Link href="/terms" className={styles.legalLink}>
               Terms of Service
             </Link>
           </div>
