@@ -272,8 +272,8 @@ export default function Home() {
       <section className={styles.wholesale}>
         <div className={styles.wholesaleInner}>
           <div className={styles.wholesaleText}>
-            <span className={styles.wholesaleLabel}>For Business</span>
-            <h2 className={styles.wholesaleTitle}>Wholesale Ordering</h2>
+            <span className={styles.wholesaleLabel}>Trade Programme</span>
+            <h2 className={styles.wholesaleTitle}>Partner With FAY</h2>
             <p className={styles.wholesaleBody}>
               Bring FAY to your boutique, retail space, or styling studio.
               We partner with select stockists who share our commitment to
