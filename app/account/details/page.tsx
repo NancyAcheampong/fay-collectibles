@@ -53,6 +53,9 @@ export default function DetailsPage() {
         <Link href="/account/address-book" className={styles.navLink}>
           Addresses
         </Link>
+        <Link href="/account/wishlist" className={styles.navLink}>
+          Wishlist
+        </Link>
       </nav>
 
       <form className={styles.form} onSubmit={handleSave} noValidate>

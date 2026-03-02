@@ -284,7 +284,7 @@ export function Header() {
                     <Link href="/account/orders" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>My Orders</Link>
                     <Link href="/account/details" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>My Details</Link>
                     <Link href="/account/address-book" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>Address Book</Link>
-                    <a href="#" className={styles.profilePopupLink}>Wishlist</a>
+                    <Link href="/account/wishlist" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>Wishlist</Link>
                   </div>
                   <div className={styles.profilePopupFooter}>
                     <button
