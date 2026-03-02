@@ -145,6 +145,9 @@ export default function AddressBookPage() {
         <Link href="/account/address-book" className={`${styles.navLink} ${styles.navLinkActive}`}>
           Addresses
         </Link>
+        <Link href="/account/wishlist" className={styles.navLink}>
+          Wishlist
+        </Link>
       </nav>
 
       {showForm ? (

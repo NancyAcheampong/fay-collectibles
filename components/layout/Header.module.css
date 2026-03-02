@@ -96,7 +96,19 @@
 }
 
 /* ============================================
-   Right Section
+   Mobile Right Section (search icon)
+   ============================================ */
+
+.mobileRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ============================================
+   Right Section (desktop)
    ============================================ */
 
 .right {
@@ -677,6 +689,10 @@
   .logoImage {
     height: 44px;
     width: 44px;
+  }
+
+  .mobileRight {
+    display: none;
   }
 
   .right {

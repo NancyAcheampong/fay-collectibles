@@ -23,6 +23,9 @@ export default function OrdersPage() {
         <Link href="/account/address-book" className={styles.navLink}>
           Addresses
         </Link>
+        <Link href="/account/wishlist" className={styles.navLink}>
+          Wishlist
+        </Link>
       </nav>
 
       <div className={styles.empty}>

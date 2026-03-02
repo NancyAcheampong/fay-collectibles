@@ -174,7 +174,28 @@ export function Header() {
           />
         </Link>
 
-        {/* Right: Action icons */}
+        {/* Mobile Right: Search icon */}
+        <div className={styles.mobileRight}>
+          <button
+            className={styles.iconButton}
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="9" r="6.5" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="13.5" y1="13.5" x2="18" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Right: Action icons (desktop) */}
         <div className={styles.right}>
           {/* Search */}
           <button
@@ -263,7 +284,7 @@ export function Header() {
                     <Link href="/account/orders" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>My Orders</Link>
                     <Link href="/account/details" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>My Details</Link>
                     <Link href="/account/address-book" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>Address Book</Link>
-                    <a href="#" className={styles.profilePopupLink}>Wishlist</a>
+                    <Link href="/account/wishlist" className={styles.profilePopupLink} onClick={() => setProfileOpen(false)}>Wishlist</Link>
                   </div>
                   <div className={styles.profilePopupFooter}>
                     <button

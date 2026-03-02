@@ -7,6 +7,7 @@ import { CartDrawer } from "@/components/ui/CartDrawer";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { CartProvider } from "@/lib/cart-context";
 import { AuthProvider } from "@/lib/auth-context";
+import { WishlistProvider } from "@/lib/wishlist-context";
 
 export const metadata: Metadata = {
   title: "FAY | Wear Confidence",
@@ -24,12 +25,14 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <CartProvider>
-            <AnnouncementBar />
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <CartDrawer />
-            <BottomNav />
+            <WishlistProvider>
+              <AnnouncementBar />
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <CartDrawer />
+              <BottomNav />
+            </WishlistProvider>
           </CartProvider>
         </AuthProvider>
       </body>

@@ -287,6 +287,13 @@
   border-color: var(--color-primary);
 }
 
+.cardImage {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  margin-bottom: var(--space-xs);
+}
+
 .cardBadge {
   font-size: var(--text-xs);
   font-weight: var(--font-weight-medium);
