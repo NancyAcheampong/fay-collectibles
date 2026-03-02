@@ -45,6 +45,35 @@
 }
 
 /* ============================================
+   Social Links
+   ============================================ */
+
+.socials {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color var(--transition-fast);
+}
+
+.socialLink:hover {
+  color: var(--color-white);
+}
+
+.socialLink svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
    Link Columns
    ============================================ */
 
