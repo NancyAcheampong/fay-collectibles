@@ -156,9 +156,9 @@ export default function RegisterPage() {
 
           <p className={styles.terms}>
             By creating an account, you agree to our{' '}
-            <a href="#" className={styles.termsLink}>Terms of Service</a>
+            <Link href="/terms" className={styles.termsLink}>Terms of Service</Link>
             {' '}and{' '}
-            <a href="#" className={styles.termsLink}>Privacy Policy</a>.
+            <Link href="/privacy" className={styles.termsLink}>Privacy Policy</Link>.
           </p>
 
           <div className={styles.divider}>

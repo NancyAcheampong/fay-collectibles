@@ -98,7 +98,7 @@ export default function SignInPage() {
             </div>
           </div>
 
-          <Link href="#" className={styles.forgotLink}>
+          <Link href="/faqs" className={styles.forgotLink}>
             Forgot your password?
           </Link>
 
