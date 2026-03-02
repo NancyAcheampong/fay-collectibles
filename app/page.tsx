@@ -267,6 +267,61 @@ export default function Home() {
       </section>
 
       {/* ============================================
+         Wholesale
+         ============================================ */}
+      <section className={styles.wholesale}>
+        <div className={styles.wholesaleInner}>
+          <div className={styles.wholesaleText}>
+            <span className={styles.wholesaleLabel}>For Business</span>
+            <h2 className={styles.wholesaleTitle}>Wholesale Ordering</h2>
+            <p className={styles.wholesaleBody}>
+              Bring FAY to your boutique, retail space, or styling studio.
+              We partner with select stockists who share our commitment to
+              quality and intentional design.
+            </p>
+            <a href="mailto:wholesale@faycollectibles.com" className={styles.wholesaleCta}>
+              <span>Enquire Now</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 7h10M8 3l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+          <div className={styles.wholesaleFeatures}>
+            <div className={styles.wholesaleFeature}>
+              <span className={styles.wholesaleFeatureTitle}>Minimum Order</span>
+              <span className={styles.wholesaleFeatureDesc}>
+                Low MOQs designed for independent retailers and boutiques.
+              </span>
+            </div>
+            <div className={styles.wholesaleFeature}>
+              <span className={styles.wholesaleFeatureTitle}>Dedicated Support</span>
+              <span className={styles.wholesaleFeatureDesc}>
+                A personal account manager from first order to restock.
+              </span>
+            </div>
+            <div className={styles.wholesaleFeature}>
+              <span className={styles.wholesaleFeatureTitle}>Brand Assets</span>
+              <span className={styles.wholesaleFeatureDesc}>
+                Lookbook imagery, copy, and merchandising guidance included.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
          Newsletter
          ============================================ */}
       <section className={styles.newsletter}>
