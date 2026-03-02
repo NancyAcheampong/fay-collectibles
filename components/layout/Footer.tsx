@@ -12,8 +12,6 @@ const shopLinks = [
 const companyLinks = [
   { label: 'About', href: '/about' },
   { label: 'Lookbook', href: '/lookbook' },
-  { label: 'Sustainability', href: '/about' },
-  { label: 'Careers', href: '/about' },
 ];
 
 const helpLinks = [
