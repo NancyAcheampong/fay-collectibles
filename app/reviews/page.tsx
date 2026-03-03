@@ -168,12 +168,7 @@ export default function ReviewsPage() {
         <div className={styles.reviewsInner}>
           {reviews.map((review) => (
             <div key={`${review.name}-${review.date}`} className={styles.reviewCard}>
-              <div className={styles.reviewHeader}>
-                <Stars count={review.rating} />
-                <span className={styles.reviewDate}>{review.date}</span>
-              </div>
-              <p className={styles.reviewText}>{review.text}</p>
-              <div className={styles.reviewFooter}>
+              <div className={styles.reviewTop}>
                 <div className={styles.reviewAuthorRow}>
                   <span className={styles.avatar} aria-hidden="true">
                     {review.initials}
@@ -184,6 +179,11 @@ export default function ReviewsPage() {
                   </div>
                 </div>
                 <span className={styles.reviewProduct}>{review.product}</span>
+              </div>
+              <p className={styles.reviewText}>{review.text}</p>
+              <div className={styles.reviewBottom}>
+                <Stars count={review.rating} />
+                <span className={styles.reviewDate}>{review.date}</span>
               </div>
             </div>
           ))}
