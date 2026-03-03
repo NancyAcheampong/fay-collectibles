@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const reviews = [
   {
     name: 'Amara K.',
+    initials: 'AK',
     location: 'London, UK',
     rating: 5,
     date: 'February 2025',
@@ -19,6 +20,7 @@ const reviews = [
   },
   {
     name: 'Daniel R.',
+    initials: 'DR',
     location: 'Manchester, UK',
     rating: 5,
     date: 'January 2025',
@@ -27,6 +29,7 @@ const reviews = [
   },
   {
     name: 'Sophie M.',
+    initials: 'SM',
     location: 'Birmingham, UK',
     rating: 5,
     date: 'January 2025',
@@ -35,6 +38,7 @@ const reviews = [
   },
   {
     name: 'James T.',
+    initials: 'JT',
     location: 'Edinburgh, UK',
     rating: 4,
     date: 'December 2024',
@@ -43,6 +47,7 @@ const reviews = [
   },
   {
     name: 'Priya N.',
+    initials: 'PN',
     location: 'Leeds, UK',
     rating: 5,
     date: 'December 2024',
@@ -51,6 +56,7 @@ const reviews = [
   },
   {
     name: 'Oliver H.',
+    initials: 'OH',
     location: 'Bristol, UK',
     rating: 5,
     date: 'November 2024',
@@ -59,6 +65,7 @@ const reviews = [
   },
   {
     name: 'Chioma A.',
+    initials: 'CA',
     location: 'London, UK',
     rating: 5,
     date: 'November 2024',
@@ -67,6 +74,7 @@ const reviews = [
   },
   {
     name: 'Marcus W.',
+    initials: 'MW',
     location: 'Glasgow, UK',
     rating: 4,
     date: 'October 2024',
@@ -166,9 +174,14 @@ export default function ReviewsPage() {
               </div>
               <p className={styles.reviewText}>{review.text}</p>
               <div className={styles.reviewFooter}>
-                <div className={styles.reviewAuthor}>
-                  <span className={styles.reviewName}>{review.name}</span>
-                  <span className={styles.reviewLocation}>{review.location}</span>
+                <div className={styles.reviewAuthorRow}>
+                  <span className={styles.avatar} aria-hidden="true">
+                    {review.initials}
+                  </span>
+                  <div className={styles.reviewAuthor}>
+                    <span className={styles.reviewName}>{review.name}</span>
+                    <span className={styles.reviewLocation}>{review.location}</span>
+                  </div>
                 </div>
                 <span className={styles.reviewProduct}>{review.product}</span>
               </div>
