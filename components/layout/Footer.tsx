@@ -12,6 +12,7 @@ const shopLinks = [
 const companyLinks = [
   { label: 'About', href: '/about' },
   { label: 'Lookbook', href: '/lookbook' },
+  { label: 'Reviews', href: '/reviews' },
 ];
 
 const helpLinks = [
