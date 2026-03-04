@@ -40,3 +40,12 @@
 .hidden {
   opacity: 0;
 }
+
+.link {
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.link:hover {
+  opacity: 0.8;
+}
