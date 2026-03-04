@@ -235,6 +235,14 @@
   flex-shrink: 0;
 }
 
+.avatarImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .reviewAuthor {
   display: flex;
   flex-direction: column;

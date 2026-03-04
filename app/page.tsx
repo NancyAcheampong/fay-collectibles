@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getFeaturedProducts, getNewArrivals } from '@/lib/products';
 import { NewsletterForm } from '@/components/ui/NewsletterForm';
 import { HeroCarousel } from '@/components/ui/HeroCarousel';
@@ -19,6 +20,27 @@ const collections = [
     name: 'The Edit',
     slug: 'the-edit',
     description: 'Curated. Considered. Complete.',
+  },
+];
+
+const testimonials = [
+  {
+    name: 'Amara K.',
+    image: '/images/reviews/avatar-1.jpg',
+    product: 'Wool Blend Overcoat',
+    text: 'The quality is absolutely exceptional. I\'ve never owned a coat that feels this luxurious yet wears so effortlessly. The tailoring is impeccable — every detail has been considered.',
+  },
+  {
+    name: 'Sophie M.',
+    image: '/images/reviews/avatar-4.jpg',
+    product: 'Leather Structured Tote',
+    text: 'This bag is stunning in person. The leather has a beautiful weight to it and the stitching is flawless. It fits everything I need for work and still looks effortlessly chic.',
+  },
+  {
+    name: 'Marcus W.',
+    image: '/images/reviews/avatar-2.jpg',
+    product: 'Wool Blend Overcoat',
+    text: 'Excellent coat. The fit is sharp and the construction is solid — you can tell this is built to last. I sized up for layering and it works perfectly over a jumper.',
   },
 ];
 
@@ -263,6 +285,58 @@ export default function Home() {
           <p className={styles.editorialText}>
             Designed to be worn. Styled to be remembered.
           </p>
+        </div>
+      </section>
+
+      {/* ============================================
+         Testimonials
+         ============================================ */}
+      <section className={styles.testimonials}>
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionLabel}>Customer Love</span>
+          <h2 className={styles.sectionTitle}>What People Are Saying</h2>
+        </div>
+
+        <div className={styles.testimonialsGrid}>
+          {testimonials.map((t) => (
+            <div key={t.name} className={styles.testimonialCard}>
+              <div className={styles.testimonialStars} aria-label="5 out of 5 stars">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path
+                      d="M8 1.5l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.77 4.29 12.9l.71-4.12-3-2.93 4.15-.6L8 1.5z"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ))}
+              </div>
+              <p className={styles.testimonialText}>&ldquo;{t.text}&rdquo;</p>
+              <div className={styles.testimonialAuthor}>
+                <Image
+                  src={t.image}
+                  alt={t.name}
+                  width={36}
+                  height={36}
+                  className={styles.testimonialAvatar}
+                />
+                <div className={styles.testimonialInfo}>
+                  <span className={styles.testimonialName}>{t.name}</span>
+                  <span className={styles.testimonialProduct}>{t.product}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.sectionCta}>
+          <Link href="/reviews" className={styles.ctaButton}>
+            Read All Reviews
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
       </section>
 
