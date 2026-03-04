@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
 
@@ -12,6 +13,7 @@ const reviews = [
   {
     name: 'Amara K.',
     initials: 'AK',
+    image: '/images/reviews/avatar-1.jpg',
     location: 'London, UK',
     rating: 5,
     date: 'February 2025',
@@ -75,6 +77,7 @@ const reviews = [
   {
     name: 'Marcus W.',
     initials: 'MW',
+    image: '/images/reviews/avatar-2.jpg',
     location: 'Glasgow, UK',
     rating: 4,
     date: 'October 2024',
@@ -170,9 +173,19 @@ export default function ReviewsPage() {
             <div key={`${review.name}-${review.date}`} className={styles.reviewCard}>
               <div className={styles.reviewTop}>
                 <div className={styles.reviewAuthorRow}>
-                  <span className={styles.avatar} aria-hidden="true">
-                    {review.initials}
-                  </span>
+                  {review.image ? (
+                    <Image
+                      src={review.image}
+                      alt={review.name}
+                      width={40}
+                      height={40}
+                      className={styles.avatarImage}
+                    />
+                  ) : (
+                    <span className={styles.avatar} aria-hidden="true">
+                      {review.initials}
+                    </span>
+                  )}
                   <div className={styles.reviewAuthor}>
                     <span className={styles.reviewName}>{review.name}</span>
                     <span className={styles.reviewLocation}>{review.location}</span>
