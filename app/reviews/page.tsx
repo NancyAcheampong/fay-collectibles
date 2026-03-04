@@ -23,6 +23,7 @@ const reviews = [
   {
     name: 'Daniel R.',
     initials: 'DR',
+    image: '/images/reviews/avatar-5.jpg',
     location: 'Manchester, UK',
     rating: 5,
     date: 'January 2025',
@@ -32,6 +33,7 @@ const reviews = [
   {
     name: 'Sophie M.',
     initials: 'SM',
+    image: '/images/reviews/avatar-4.jpg',
     location: 'Birmingham, UK',
     rating: 5,
     date: 'January 2025',
@@ -50,6 +52,7 @@ const reviews = [
   {
     name: 'Priya N.',
     initials: 'PN',
+    image: '/images/reviews/avatar-3.jpg',
     location: 'Leeds, UK',
     rating: 5,
     date: 'December 2024',
@@ -59,6 +62,7 @@ const reviews = [
   {
     name: 'Oliver H.',
     initials: 'OH',
+    image: '/images/reviews/avatar-6.jpg',
     location: 'Bristol, UK',
     rating: 5,
     date: 'November 2024',
